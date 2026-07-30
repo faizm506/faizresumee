@@ -1,0 +1,487 @@
+/* =========================================================
+   1. GLOBAL VARIABLES & BASE STYLES
+   ========================================================= */
+:root {
+    --black: #111111;
+    --white: #ffffff;
+    --grey-light: #f5f5f5;
+    --grey-dark: #757575;
+}
+
+body {
+    font-family: 'Helvetica Neue', 'Inter', sans-serif;
+    background-color: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utilities */
+.fw-black { font-weight: 900; }
+.z-1 { z-index: 1; }
+.bg-light { background-color: var(--grey-light) !important; }
+.bg-off-white { background-color: #f7f9fc; }
+.border-dark { border-color: var(--black) !important; }
+
+/* =========================================================
+   2. TYPOGRAPHY & HEADINGS
+   ========================================================= */
+.section-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+}
+
+.text-hollow {
+    color: transparent;
+    -webkit-text-stroke: 3px var(--black);
+}
+
+/* =========================================================
+   3. NAVBAR
+   ========================================================= */
+.nike-nav {
+    background: var(--white);
+    padding: 1.5rem 0;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.nike-nav.scrolled {
+    padding: 1rem 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    color: var(--black) !important;
+    letter-spacing: -0.05em;
+}
+
+.nav-link {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--black) !important;
+    position: relative;
+    padding: 0.5rem 0 !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--black);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* =========================================================
+   4. BUTTONS
+   ========================================================= */
+.btn-nike {
+    background-color: var(--black);
+    color: var(--white);
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 2px solid var(--black);
+    transition: all 0.3s ease;
+}
+
+.btn-nike:hover {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.btn-nike-outline {
+    background-color: transparent;
+    color: var(--black);
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 2px solid #e5e5e5;
+    transition: all 0.3s ease;
+}
+
+.btn-nike-outline:hover {
+    border-color: var(--black);
+}
+
+/* =========================================================
+   5. HERO SECTION
+   ========================================================= */
+.hero-section {
+    min-height: 100vh;
+    padding-top: 100px;
+    background-color: var(--white);
+}
+
+.hero-title {
+    font-size: clamp(5rem, 14vw, 11rem); 
+    font-weight: 900;
+    line-height: 0.85; 
+    letter-spacing: -0.05em;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--grey-dark);
+}
+
+#hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: auto; 
+}
+
+/* =========================================================
+   FULL WIDTH TERMINAL WINDOW
+   ========================================================= */
+.terminal-window {
+    width: 100%;
+    max-width: 100%; /* Removed the 850px limit */
+    margin: 0 auto;
+    height: auto; 
+    min-height: 400px; 
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Consolas', 'Fira Code', 'Monaco', 'Courier New', monospace;
+}
+
+/* Header & Tabs */
+.terminal-header {
+    background-color: #0c0c0c;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid #2d2d2d;
+    flex-shrink: 0;
+}
+.terminal-tab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #1e1e1e;
+    padding: 8px 20px 8px 15px;
+    border-radius: 8px 8px 0 0;
+    margin-top: 8px;
+    margin-left: 10px;
+    color: #cccccc;
+    font-size: 0.85rem;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.05);
+}
+.window-controls { display: flex; height: 100%; }
+.control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 38px;
+    color: #a0a0a0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.control-btn:hover { background-color: #2d2d2d; color: #ffffff; }
+.control-btn.close:hover { background-color: #e81123; color: #ffffff; }
+
+/* Body & Text */
+.terminal-body {
+    padding: 2rem;
+    color: #cccccc;
+    font-size: 1rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+.cmd-line {
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+.prompt-user { color: #8ae234; font-weight: bold; }
+.prompt-host { color: #729fcf; font-weight: bold; }
+.prompt-dir { color: #ad7fa8; font-weight: bold; }
+.cmd-text { color: #eeeeee; }
+.output-block {
+    margin-bottom: 2rem;
+    color: #d3d7cf;
+    white-space: pre-line;
+}
+
+/* Syntax Highlighting */
+.log-success { color: #8ae234; font-weight: bold; }
+.log-info { color: #34e2e2; font-weight: bold; }
+.hl-keyword { color: #ad7fa8; font-weight: bold; } 
+.hl-string { color: #8ae234; } 
+
+/* =========================================================
+   NATIVE INTERACTIVE INPUT
+   ========================================================= */
+.real-terminal-input {
+    background: transparent;
+    border: none;
+    color: #eeeeee;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    flex-grow: 1;
+    min-width: 50%;
+    caret-color: #8ae234; 
+}
+
+@media (max-width: 768px) {
+    .terminal-body { padding: 1.5rem; font-size: 0.85rem; }
+    .terminal-tab { margin-left: 0; border-radius: 0; flex-grow: 1; }
+    .control-btn { width: 38px; }
+}
+/* =========================================================
+   7. PRO STRENGTHS GRID
+   ========================================================= */
+.strength-box {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--white);
+    transition: background-color 0.4s ease;
+    cursor: crosshair; 
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.strength-box:hover {
+    background-color: var(--black);
+}
+
+.strength-box .content-wrapper h4,
+.strength-box .description-text {
+    color: var(--black);
+    transition: color 0.4s ease;
+}
+
+.strength-box:hover .content-wrapper h4 { color: var(--white); }
+.strength-box:hover .description-text { color: #a0a0a0; }
+
+.strength-bg-num {
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    font-size: 14rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none; 
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s ease;
+}
+
+.strength-box:hover .strength-bg-num {
+    opacity: 0.3;
+    transform: scale(1.1) rotate(-5deg); 
+    -webkit-text-stroke: 3px var(--white); 
+}
+
+/* =========================================================
+   8. EDUCATION SCHEMATIC (Dark Mode)
+   ========================================================= */
+.edu-bg-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.edu-stat-box {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 0; 
+    backdrop-filter: blur(4px);
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.edu-stat-box:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.coursework-matrix {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.course-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: default;
+}
+
+.course-tag.tag-highlight {
+    color: #00ffcc; 
+    border-color: rgba(0, 255, 204, 0.3);
+}
+
+.course-tag:hover {
+    color: var(--black);
+    background-color: var(--white);
+    border-color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.course-tag.tag-highlight:hover {
+    color: var(--black);
+    background-color: #00ffcc;
+    border-color: #00ffcc;
+    box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+}
+
+/* =========================================================
+   9. BENTO BOX CARDS (Optional/Kept from earlier)
+   ========================================================= */
+.bento-card {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.bento-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.icon-wrapper {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.bento-card:hover .icon-wrapper { transform: scale(1.05); }
+
+.icon-purple { background-color: #f3e8ff; color: #9333ea; }
+.icon-blue { background-color: #e0f2fe; color: #0284c7; }
+.icon-green { background-color: #dcfce7; color: #16a34a; }
+
+.bento-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.bento-list li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.bento-list li:last-child { margin-bottom: 0; }
+
+.bento-list li::before {
+    content: '\f00c'; 
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: var(--black);
+    font-size: 0.9rem;
+}
+
+/* =========================================================
+   10. ANIMATIONS & KEYFRAMES
+   ========================================================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1), transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+.cursor-active {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background-color: #eeeeee;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* =========================================================
+   11. MEDIA QUERIES (Mobile Adjustments)
+   ========================================================= */
+@media (max-width: 768px) {
+    /* Hero */
+    .text-hollow {
+        -webkit-text-stroke: 1.5px var(--black);
+    }
+    
+    /* Terminal */
+    .terminal-section { padding: 2rem 1rem; }
+    .terminal-body { padding: 1rem; font-size: 0.85rem; }
+    .terminal-tab { margin-left: 0; border-radius: 0; flex-grow: 1; }
+    .control-btn { width: 38px; }
+}

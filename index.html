@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faiz Mansuri | AI/ML Engineer</title>
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;500;700;900&family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top nike-nav">
+        <div class="container-fluid px-4 px-md-5">
+            <a class="navbar-brand fw-black text-uppercase" href="#">Faiz Mansuri</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-4">
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="#education">Education</a></li>
+                    <li class="nav-item"><a class="nav-link text-uppercase" href="#strengths">Strengths</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+    <section id="about" class="hero-section d-flex align-items-center position-relative overflow-hidden">
+        <!-- Background Canvas for Node Network -->
+        <canvas id="hero-canvas"></canvas>
+        
+        <div class="container-fluid px-4 px-md-5 reveal position-relative z-1">
+            <div class="row">
+                <div class="col-12 col-xl-10">
+                    <!-- Aesthetic Stacked Typography -->
+                    <div class="mb-4">
+                        <h1 class="hero-title text-uppercase mb-0 text-hollow d-block">AI/ML</h1>
+                        <h1 class="hero-title text-uppercase mb-0 d-block">Engineer.</h1>
+                    </div>
+                    
+                    <p class="hero-subtitle mb-5 col-lg-8 position-relative bg-white bg-opacity-50 p-2 rounded">
+                        Detail Oriented Developer with a proven background in geospatial data analysis, machine learning workflows, and full-stack Django development. Adept at managing end-to-end software lifecycles, and converting technical requirements into secure, clean applications.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row gap-3">
+                        <a href="mailto:faizsacisro@gmail.com" class="btn btn-nike px-5 py-3">Contact Me</a>
+                        <a href="tel:+919773423956" class="btn btn-nike-outline px-5 py-3">+91 9773423956</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- Experience Section: Full Width Terminal -->
+<section id="experience" class="py-5" style="background-color: transparent;">
+    <div class="container-fluid px-4 px-md-5"> <!-- Expanded to full width -->
+        <div class="row">
+            <div class="col-12">
+                
+                <div class="terminal-window reveal">
+                    <!-- Windows Terminal Header -->
+                    <div class="terminal-header">
+                        <div class="terminal-tab">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 4.5L6.5 8L3 11.5" stroke="#8ae234" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7.5 11.5H12" stroke="#cccccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span class="terminal-title">isro_admin@linux-server: ~/experience</span>
+                        </div>
+                        <div class="window-controls">
+                            <div class="control-btn minimize" title="Minimize"><svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor"><path d="M11 4.399V5.5H0V4.399h11z"/></svg></div>
+                            <div class="control-btn maximize" title="Maximize"><svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor"><path d="M11 0v11H0V0h11zM9.899 1.101H1.1V9.9h8.8V1.1z"/></svg></div>
+                            <div class="control-btn close" title="Close"><svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor"><path d="M6.279 5.5L11 10.221l-.779.779L5.5 6.279.779 11 0 10.221 4.721 5.5 0 .779.779 0 5.5 4.721 10.221 0 11 .779 6.279 5.5z"/></svg></div>
+                        </div>
+                    </div>
+
+                    <!-- Terminal Body -->
+                    <div class="terminal-body" id="terminal-body">
+                        <div id="output-container"></div>
+                        
+                        <!-- Native Interactive Input Line -->
+                        <div id="interactive-line" class="cmd-line" style="display: none;">
+                            <span><span class="prompt-user">isro_admin</span>@<span class="prompt-host">sac-server</span>:<span class="prompt-dir">~/experience</span>$</span>
+                            <input type="text" id="term-input" class="real-terminal-input" autocomplete="off" spellcheck="false">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Education Section (Dark Mode Schematic) -->
+    <section id="education" class="py-5 bg-black text-white position-relative overflow-hidden">
+        
+        <!-- Subtle Background Grid for Technical Feel -->
+        <div class="edu-bg-grid"></div>
+
+        <div class="container-fluid px-4 px-md-5 py-5 position-relative z-1">
+            <div class="row mb-5 reveal">
+                <div class="col-12">
+                    <h2 class="section-title text-uppercase text-white">Education &<br>Academics</h2>
+                </div>
+            </div>
+            
+            <div class="row g-5 reveal delay-1">
+                <!-- Left: University Stats (Terminal Vibe) -->
+                <div class="col-12 col-lg-4">
+                    <div class="edu-stat-box p-4 h-100">
+                        <h3 class="fw-black fs-2 text-uppercase mb-1 text-white">LJ UNIVERSITY[cite: 1]</h3>
+                        <p class="fs-5 fw-bold mb-4" style="color: #00ffcc;">Bachelor of Computer Applications (BCA)[cite: 1]</p>
+                        
+                        <div class="d-flex flex-column gap-3 font-monospace text-uppercase small">
+                            <div class="d-flex justify-content-between border-bottom border-secondary pb-2">
+                                <span class="text-white-50">Timeline</span>
+                                <span>2019 - 2022[cite: 1]</span>
+                            </div>
+                            <div class="d-flex justify-content-between border-bottom border-secondary pb-2">
+                                <span class="text-white-50">Location</span>
+                                <span>Ahmedabad[cite: 1]</span>
+                            </div>
+                            <div class="d-flex justify-content-between border-bottom border-secondary pb-2">
+                                <span class="text-white-50">SEM 6 Score</span>
+                                <span>6.8 / 10.0[cite: 1]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Interactive Coursework Matrix -->
+                <div class="col-12 col-lg-8">
+                    <h4 class="fw-bold fs-4 mb-4 text-white">Relevant Coursework & Competencies[cite: 1]</h4>
+                    
+                    <div class="coursework-matrix">
+                        <!-- Core Languages -->
+                        <span class="course-tag">C</span>
+                        <span class="course-tag">Java</span>
+                        <span class="course-tag">Python</span>
+                        
+                        <!-- Web & Backend -->
+                        <span class="course-tag">Python-Django</span>
+                        <span class="course-tag">System Software</span>
+                        
+                        <!-- AI & Data Science (Highlighted) -->
+                        <span class="course-tag tag-highlight">Deep Learning</span>
+                        <span class="course-tag tag-highlight">Neural Networks</span>
+                        <span class="course-tag tag-highlight">Large Language Models (LLMs)</span>
+                        <span class="course-tag tag-highlight">Machine Learning</span>
+                        <span class="course-tag tag-highlight">Data Science</span>
+                        
+                        <!-- Emerging Tech -->
+                        <span class="course-tag">Cloud Computing</span>
+                        <span class="course-tag">IoT</span>
+                        <span class="course-tag">Cybersecurity</span>
+                        <span class="course-tag">Android Application Dev</span>
+                        <span class="course-tag">AR/VR Environments</span>
+                    </div>
+
+                    <p class="mt-4 fs-6 text-white-50 lh-lg mb-0">
+                        * Gained foundational knowledge across full-stack architecture, machine learning lifecycles, and advanced interactive environments through hands-on academic projects.[cite: 1]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+   <!-- Strengths Section (Pro Typographic Grid) -->
+    <section id="strengths" class="py-5 border-top border-dark bg-white">
+        <div class="container-fluid px-4 px-md-5 py-5">
+            <div class="row mb-5 reveal">
+                <div class="col-12">
+                    <h2 class="section-title text-uppercase">Core<br>Strengths</h2>
+                </div>
+            </div>
+            
+            <!-- Seamless Brutalist Grid -->
+            <div class="row g-0 border-top border-dark border-start border-dark">
+                
+                <!-- 01 -->
+                <div class="col-12 col-lg-4 strength-box border-bottom border-end border-dark p-4 p-md-5 reveal delay-1">
+                    <div class="strength-bg-num text-hollow d-none d-md-block">01</div>
+                    <div class="position-relative z-1 content-wrapper">
+                        <h4 class="fw-black fs-3 text-uppercase mb-3">Problem-Solving</h4>
+                        <p class="fs-6 fw-medium mb-0 description-text">Adept at tackling complex technical challenges, with a focus on efficiency and optimizing software solutions.</p>
+                    </div>
+                </div>
+
+                <!-- 02 -->
+                <div class="col-12 col-lg-4 strength-box border-bottom border-end border-dark p-4 p-md-5 reveal delay-2">
+                    <div class="strength-bg-num text-hollow d-none d-md-block">02</div>
+                    <div class="position-relative z-1 content-wrapper">
+                        <h4 class="fw-black fs-3 text-uppercase mb-3">Detail Oriented</h4>
+                        <p class="fs-6 fw-medium mb-0 description-text">Meticulous in satellite image labeling and data analysis, ensuring high-quality input for model training and accurate predictions.</p>
+                    </div>
+                </div>
+
+                <!-- 03 -->
+                <div class="col-12 col-lg-4 strength-box border-bottom border-end border-dark p-4 p-md-5 reveal delay-3">
+                    <div class="strength-bg-num text-hollow d-none d-md-block">03</div>
+                    <div class="position-relative z-1 content-wrapper">
+                        <h4 class="fw-black fs-3 text-uppercase mb-3">Adaptable</h4>
+                        <p class="fs-6 fw-medium mb-0 description-text">Quick to learn new technologies and tools, and always enthusiastic about applying them to real-world problems.</p>
+                    </div>
+                </div>
+
+                <!-- 04 (Wider on Desktop) -->
+                <div class="col-12 col-lg-6 strength-box border-bottom border-end border-dark p-4 p-md-5 reveal delay-1">
+                    <div class="strength-bg-num text-hollow d-none d-md-block">04</div>
+                    <div class="position-relative z-1 content-wrapper">
+                        <h4 class="fw-black fs-3 text-uppercase mb-3">Team Collaboration</h4>
+                        <p class="fs-6 fw-medium mb-0 description-text">Excellent communicator with experience working in collaborative environments, able to work both independently and as part of a team to meet project goals.</p>
+                    </div>
+                </div>
+
+                <!-- 05 (Wider on Desktop) -->
+                <div class="col-12 col-lg-6 strength-box border-bottom border-end border-dark p-4 p-md-5 reveal delay-2">
+                    <div class="strength-bg-num text-hollow d-none d-md-block">05</div>
+                    <div class="position-relative z-1 content-wrapper">
+                        <h4 class="fw-black fs-3 text-uppercase mb-3">Mentoring</h4>
+                        <p class="fs-6 fw-medium mb-0 description-text">Skilled at breaking down complex technical concepts into understandable lessons, fostering a positive learning environment.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5 bg-black text-white">
+        <div class="container-fluid px-4 px-md-5 d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <h2 class="fw-black text-uppercase mb-3 mb-md-0 fs-4">Faiz Mansuri</h2>
+            <p class="text-white-50 small mb-0 fw-bold text-uppercase">&copy; 2026. Built for impact.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
