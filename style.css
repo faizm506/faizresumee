@@ -40,49 +40,119 @@ body {
 }
 
 /* =========================================================
-   3. NAVBAR
+   SYSTEM COMMAND HUD NAVBAR
    ========================================================= */
-.nike-nav {
-    background: var(--white);
-    padding: 1.5rem 0;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid transparent;
+
+/* Dark Glassmorphism Container */
+.system-nav {
+    background: rgba(12, 12, 12, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1.5rem auto;
+    width: calc(100% - 3rem);
+    max-width: 1400px;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1030;
 }
 
-.nike-nav.scrolled {
-    padding: 1rem 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.navbar-brand {
-    font-size: 1.5rem;
-    color: var(--black) !important;
-    letter-spacing: -0.05em;
-}
-
-.nav-link {
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--black) !important;
-    position: relative;
-    padding: 0.5rem 0 !important;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: var(--black);
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
+/* Scroll State (Shrinks and hugs the top) */
+.system-nav.scrolled {
+    margin: 0 auto;
     width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: rgba(12, 12, 12, 0.95);
+}
+
+/* Colors */
+.text-nav-primary { color: #ffffff; }
+.text-nav-secondary { color: rgba(255, 255, 255, 0.5); }
+.border-nav-divider { border-color: rgba(255, 255, 255, 0.1) !important; }
+
+/* Pulsing Status LED */
+.nav-status-led {
+    width: 8px;
+    height: 8px;
+    background-color: #00ffcc;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 255, 204, 0.8);
+    animation: pulseNavLed 2s infinite;
+}
+
+@keyframes pulseNavLed {
+    0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(0, 255, 204, 0.8); }
+    50% { opacity: 0.4; box-shadow: 0 0 2px rgba(0, 255, 204, 0.4); }
+}
+
+/* System Link Styling */
+.sys-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 700;
+    font-size: 0.85rem;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.3s ease;
+}
+
+.nav-num {
+    font-family: 'Consolas', 'Fira Code', monospace;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.75rem;
+    transition: color 0.3s ease;
+}
+
+/* Cybernetic Hover Effect (Brackets) */
+.sys-link::before,
+.sys-link::after {
+    opacity: 0;
+    color: #00ffcc;
+    font-family: 'Consolas', monospace;
+    font-weight: 900;
+    transition: all 0.3s ease;
+}
+
+.sys-link::before { content: '['; transform: translateX(10px); }
+.sys-link::after { content: ']'; transform: translateX(-10px); }
+
+.sys-link:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.sys-link:hover .nav-num {
+    color: #00ffcc;
+}
+
+.sys-link:hover::before { opacity: 1; transform: translateX(0); }
+.sys-link:hover::after { opacity: 1; transform: translateX(0); }
+
+/* Mobile Menu Adjustments */
+@media (max-width: 991px) {
+    .system-nav {
+        margin: 1rem;
+        width: calc(100% - 2rem);
+    }
+    .navbar-collapse {
+        background: rgba(12, 12, 12, 0.95);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 1rem;
+        padding: 1rem 0;
+        border-radius: 0 0 12px 12px;
+    }
+    .sys-link {
+        padding: 1rem !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .sys-link::before, .sys-link::after { display: none; /* Hide brackets on mobile to save space */ }
 }
 
 /* =========================================================
@@ -129,7 +199,7 @@ body {
 }
 
 .hero-title {
-    font-size: clamp(5rem, 14vw, 11rem); 
+    font-size: clamp(3.5rem, 12vw, 11rem); 
     font-weight: 900;
     line-height: 0.85; 
     letter-spacing: -0.05em;
@@ -308,133 +378,189 @@ body {
 }
 
 /* =========================================================
-   8. EDUCATION SCHEMATIC (Dark Mode)
+   EDUCATION SECTION (MONOCHROME DOSSIER AESTHETIC)
    ========================================================= */
-.edu-bg-grid {
+
+.edu-bw-section {
+    background-color: #050505; /* Deepest black */
+    color: #ffffff;
+    border-top: 1px solid #333;
+}
+
+/* Subtle Technical Grid Overlay */
+.edu-bw-grid {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
     z-index: 0;
     pointer-events: none;
 }
 
-.edu-stat-box {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 0; 
-    backdrop-filter: blur(4px);
-    transition: border-color 0.3s ease, background 0.3s ease;
+/* Left Column: Data Sheet Box */
+.data-sheet-box {
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    cursor: crosshair;
 }
 
-.edu-stat-box:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.05);
+/* Invert colors on hover for stark contrast */
+.data-sheet-box:hover {
+    background-color: #ffffff;
+}
+.data-sheet-box:hover h3, 
+.data-sheet-box:hover .data-label,
+.data-sheet-box:hover .data-value,
+.data-sheet-box:hover p {
+    color: #000000 !important;
+}
+.data-sheet-box:hover svg rect,
+.data-sheet-box:hover svg circle {
+    stroke: #000000;
+}
+.data-sheet-box:hover .data-row {
+    border-bottom-color: #000000 !important;
 }
 
+/* Data Rows Formatting */
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: border-color 0.2s ease;
+}
+
+.data-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+}
+
+.data-value {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Right Column: Coursework Matrix */
 .coursework-matrix {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
 }
 
-.course-tag {
+/* Standard Outline Tags */
+.mono-tag {
     display: inline-block;
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    font-weight: 600;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: 'Consolas', 'Fira Code', monospace;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-    cursor: default;
+    color: #ffffff;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0s; /* 0s transition for a snappy, mechanical feel */
+    cursor: crosshair;
 }
 
-.course-tag.tag-highlight {
-    color: #00ffcc; 
-    border-color: rgba(0, 255, 204, 0.3);
+.mono-tag:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
 }
 
-.course-tag:hover {
-    color: var(--black);
-    background-color: var(--white);
-    border-color: var(--white);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+/* Highlighted Solid Tags (For AI/ML Focus) */
+.mono-tag.tag-filled {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
 }
 
-.course-tag.tag-highlight:hover {
-    color: var(--black);
-    background-color: #00ffcc;
-    border-color: #00ffcc;
-    box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+.mono-tag.tag-filled:hover {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
 }
-
 /* =========================================================
-   9. BENTO BOX CARDS (Optional/Kept from earlier)
+   SYSTEM CAPABILITIES (SERVER BLADE AESTHETIC)
    ========================================================= */
-.bento-card {
-    background: #ffffff;
-    border-radius: 24px;
-    border: 1px solid rgba(0, 0, 0, 0.03);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+.capability-node {
+    transition: background-color 0.3s ease;
 }
 
-.bento-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
+.capability-node:hover {
+    background-color: #0a0a0a;
 }
 
-.icon-wrapper {
-    width: 56px;
-    height: 56px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    transition: transform 0.3s ease;
+.node-header {
+    transition: padding 0.3s ease;
 }
 
-.bento-card:hover .icon-wrapper { transform: scale(1.05); }
-
-.icon-purple { background-color: #f3e8ff; color: #9333ea; }
-.icon-blue { background-color: #e0f2fe; color: #0284c7; }
-.icon-green { background-color: #dcfce7; color: #16a34a; }
-
-.bento-list {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 0;
+.capability-node:hover .node-header {
+    padding-left: 15px; /* Slight indent on hover */
 }
 
-.bento-list li {
-    position: relative;
-    padding-left: 1.75rem;
-    margin-bottom: 1rem;
-    line-height: 1.6;
-    font-size: 1.05rem;
+/* Accordion Expansion Logic */
+.node-body {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s ease;
 }
 
-.bento-list li:last-child { margin-bottom: 0; }
+.capability-node:hover .node-body {
+    max-height: 200px; /* Adjust if your content gets longer */
+    opacity: 1;
+    padding-left: 15px;
+}
 
-.bento-list li::before {
-    content: '\f00c'; 
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    left: 0;
-    top: 2px;
-    color: var(--black);
-    font-size: 0.9rem;
+/* Hover Typography & Colors */
+.capability-node:hover .node-title {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.capability-node:hover .node-id {
+    color: #00ffcc !important; /* Cyan accent */
+}
+
+/* LED Status Indicator */
+.led {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #333333;
+    display: inline-block;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.capability-node:hover .node-status {
+    color: #8ae234 !important; /* Terminal Green */
+}
+
+.capability-node:hover .led {
+    background-color: #8ae234;
+    box-shadow: 0 0 8px #8ae234;
+}
+
+.w-md-50 {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .w-md-50 { width: 50% !important; }
+    .node-title { font-size: 2rem !important; }
+}
+
+@media (max-width: 768px) {
+    .node-title { font-size: 1.25rem !important; }
+    .node-id { font-size: 1rem !important; }
 }
 
 /* =========================================================
@@ -471,17 +597,376 @@ body {
 }
 
 /* =========================================================
-   11. MEDIA QUERIES (Mobile Adjustments)
+   MEDIA QUERIES (Mobile Adjustments)
    ========================================================= */
 @media (max-width: 768px) {
     /* Hero */
+    .hero-title {
+        font-size: clamp(2.8rem, 14vw, 4.5rem); /* Dynamically shrinks to fit perfectly on phones */
+        line-height: 0.9;
+        letter-spacing: -0.03em; /* Slightly loosens letter spacing so it's readable when small */
+    }
+    
     .text-hollow {
         -webkit-text-stroke: 1.5px var(--black);
     }
     
     /* Terminal */
-    .terminal-section { padding: 2rem 1rem; }
-    .terminal-body { padding: 1rem; font-size: 0.85rem; }
+    .terminal-body { padding: 1.5rem; font-size: 0.85rem; }
     .terminal-tab { margin-left: 0; border-radius: 0; flex-grow: 1; }
     .control-btn { width: 38px; }
+}
+
+/* =========================================================
+   ADVANCED 3D PROJECT ENGINE
+   ========================================================= */
+
+@media (min-width: 992px) {
+    .border-end-lg { border-right: 1px solid #ffffff; }
+}
+
+.tech-badge {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-family: 'Consolas', 'Fira Code', monospace;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.tech-badge:hover {
+    border-color: #ffffff;
+    color: #000000;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.view-code-btn {
+    display: block;
+    color: #ffffff;
+    background-color: #050505;
+    transition: all 0.2s ease;
+}
+
+.view-code-btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+    letter-spacing: 2px;
+}
+
+#canvas-container {
+    min-height: 500px;
+    background: radial-gradient(circle at center, #111111 0%, #000000 100%);
+}
+
+.cursor-crosshair { cursor: crosshair; }
+.pointer-events-none { pointer-events: none; }
+
+/* Blinking Recording Dot */
+.blink-indicator {
+    color: #ff0000;
+    animation: blinkIndicator 1s step-end infinite;
+}
+
+@keyframes blinkIndicator {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.blink-text { animation: blinkText 2s infinite; }
+@keyframes blinkText {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* CRT Scanlines Overlay */
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+    background-size: 100% 4px;
+    opacity: 0.6;
+}
+
+/* HUD Overlay Styling */
+.hud-overlay {
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+/* =========================================================
+   ENHANCED RESEARCH & DATA VAULT
+   ========================================================= */
+
+/* Fade Mask for Marquee Edges */
+.marquee-fade-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background-color: #050505;
+    padding: 2.5rem 0;
+    cursor: grab;
+}
+
+.marquee-wrapper:active { cursor: grabbing; }
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: scrollMarquee 45s linear infinite;
+}
+
+.marquee-track:hover { animation-play-state: paused; }
+
+@keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+}
+
+/* Beautiful Classified Folder Item */
+.vault-folder {
+    width: 320px;
+    height: 190px;
+    margin: 0 1.5rem;
+    background: linear-gradient(145deg, #111111 0%, #0a0a0a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    position: relative;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* The Folder "Tab" */
+.vault-folder::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: -1px;
+    width: 130px;
+    height: 12px;
+    background-color: #111;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.4s ease;
+}
+
+/* Neon Glow Hover Effect */
+.vault-folder:hover {
+    background: linear-gradient(145deg, #1a1a1a 0%, #111111 100%);
+    border-color: #00ffcc;
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 255, 204, 0.15);
+}
+
+.vault-folder:hover::before {
+    background-color: #00ffcc;
+    border-color: #00ffcc;
+}
+
+.vault-folder:hover .folder-title {
+    color: #00ffcc !important;
+}
+
+.vault-folder:hover .folder-icon svg {
+    stroke: #00ffcc !important;
+}
+
+/* =========================================================
+   VAULT MODAL (PREMIUM GLASSMORPHISM)
+   ========================================================= */
+
+.vault-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(16px); 
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.vault-modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.vault-modal-content {
+    background: rgba(12, 12, 12, 0.85);
+    width: 90%;
+    max-width: 750px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(0,255,204,0.1);
+}
+
+.vault-modal-overlay.active .vault-modal-content {
+    transform: translateY(0) scale(1);
+    border-color: rgba(0, 255, 204, 0.3);
+}
+
+/* Watermark */
+.vault-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    font-size: 5.5rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.02); 
+    white-space: nowrap;
+    line-height: 1;
+    z-index: 0;
+}
+
+.close-vault-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.close-vault-btn:hover {
+    background: #00ffcc; 
+    border-color: #00ffcc;
+    color: #000000;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+}
+
+@media (max-width: 768px) {
+    .vault-modal-content { padding: 2rem; }
+    .vault-watermark { font-size: 2.5rem; }
+    .vault-folder { width: 280px; height: 170px; margin: 0 1rem; }
+}
+
+/* =========================================================
+   HIGH-CONTRAST LIGHT MODE FOOTER (REFINED)
+   ========================================================= */
+
+.footer-light-mode {
+    background-color: #f8f9fa; /* Ultra-clean off-white */
+    color: #111111; 
+}
+
+/* Scaled-down Typography */
+.display-footer-text {
+    /* Shrinks to 2.5rem on phones, maxes out at 7rem on desktops */
+    font-size: clamp(2.5rem, 7vw, 7rem); 
+    letter-spacing: -0.04em;
+    transform: translateX(-3px); 
+}
+
+.text-hollow-dark {
+    color: transparent;
+    -webkit-text-stroke: 2px #111111;
+}
+
+.tracking-widest {
+    letter-spacing: 0.15em;
+}
+
+/* Minimalist Link Styling */
+.footer-link-light {
+    color: #111111;
+    text-decoration: none;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.footer-link-light .arrow {
+    display: inline-block;
+    margin-left: 6px;
+    font-family: system-ui, sans-serif;
+    transition: transform 0.3s ease;
+}
+
+.footer-link-light:hover {
+    color: #000000;
+}
+
+.footer-link-light:hover .arrow {
+    transform: translate(4px, -4px);
+}
+
+/* Underline effect on hover */
+.footer-link-light::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #111111;
+    transition: width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.footer-link-light:hover::after {
+    width: 100%;
+}
+
+/* Availability Badge */
+.availability-badge {
+    background-color: transparent;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.availability-badge:hover {
+    background-color: #111111;
+}
+.availability-badge:hover span {
+    color: #ffffff !important;
+}
+
+.pulsing-dot-green {
+    width: 10px;
+    height: 10px;
+    background-color: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulseGreen 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes pulseGreen {
+    to { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .text-hollow-dark {
+        -webkit-text-stroke: 1.5px #111111;
+    }
+    .availability-badge {
+        width: 100%;
+        justify-content: center;
+    }
+    .display-footer-text {
+        transform: translateX(-1px);
+    }
 }

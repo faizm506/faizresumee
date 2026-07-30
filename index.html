@@ -17,23 +17,40 @@
 <body data-bs-spy="scroll" data-bs-target="#navbar">
 
     <!-- Navigation -->
-    <nav id="navbar" class="navbar navbar-expand-lg fixed-top nike-nav">
-        <div class="container-fluid px-4 px-md-5">
-            <a class="navbar-brand fw-black text-uppercase" href="#">Faiz Mansuri</a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto gap-4">
-                    <li class="nav-item"><a class="nav-link text-uppercase" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link text-uppercase" href="#experience">Experience</a></li>
-                    <li class="nav-item"><a class="nav-link text-uppercase" href="#education">Education</a></li>
-                    <li class="nav-item"><a class="nav-link text-uppercase" href="#strengths">Strengths</a></li>
-                </ul>
+    <!-- Floating System Command HUD Navbar -->
+<nav id="navbar" class="navbar navbar-expand-lg fixed-top system-nav">
+    <div class="container-fluid px-4">
+        
+        <!-- Brand / Designation (System Output Style) -->
+        <a class="navbar-brand d-flex align-items-center gap-3" href="#">
+            <div class="nav-status-led"></div>
+            <div class="d-flex flex-column lh-1">
+                <span class="fw-black text-uppercase fs-5 tracking-widest text-nav-primary">Faiz Mansuri</span>
             </div>
+        </a>
+        
+        <!-- Custom Hamburger Icon -->
+        <button class="navbar-toggler border-0 shadow-none text-nav-primary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+                <path d="M3 12h18M3 6h18M3 18h18"></path>
+            </svg>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto gap-1 gap-lg-4 align-items-lg-center mt-4 mt-lg-0">
+                <li class="nav-item"><a class="nav-link sys-link text-uppercase" href="#experience"><span class="nav-num">01.</span> Experience</a></li>
+                <li class="nav-item"><a class="nav-link sys-link text-uppercase" href="#featured-project"><span class="nav-num">02.</span> Projects</a></li>
+                <li class="nav-item"><a class="nav-link sys-link text-uppercase" href="#capabilities"><span class="nav-num">03.</span> Capabilities</a></li>
+                <li class="nav-item"><a class="nav-link sys-link text-uppercase" href="#data-vault"><span class="nav-num">04.</span> Vault</a></li>
+                
+                <!-- Live System Clock (Desktop Only) -->
+                <li class="nav-item d-none d-lg-flex align-items-center ms-lg-3 ps-lg-4 border-start border-nav-divider">
+                    <span id="sys-clock" class="font-monospace text-nav-secondary small fw-bold" style="font-size: 0.75rem;">00:00:00 IST</span>
+                </li>
+            </ul>
         </div>
-    </nav>
-
+    </div>
+</nav>
     <!-- Hero Section -->
     <!-- Hero Section -->
     <section id="about" class="hero-section d-flex align-items-center position-relative overflow-hidden">
@@ -100,147 +117,451 @@
         </div>
     </div>
 </section>
-    <!-- Education Section (Dark Mode Schematic) -->
-    <section id="education" class="py-5 bg-black text-white position-relative overflow-hidden">
-        
-        <!-- Subtle Background Grid for Technical Feel -->
-        <div class="edu-bg-grid"></div>
+    <!-- Education Section (Monochrome Technical Dossier) -->
+<section id="education" class="edu-bw-section position-relative overflow-hidden">
+    
+    <!-- Blueprint / Technical Grid Background -->
+    <div class="edu-bw-grid"></div>
 
-        <div class="container-fluid px-4 px-md-5 py-5 position-relative z-1">
-            <div class="row mb-5 reveal">
-                <div class="col-12">
-                    <h2 class="section-title text-uppercase text-white">Education &<br>Academics</h2>
+    <div class="container-fluid px-4 px-md-5 py-5 position-relative z-1">
+        
+        <!-- Header -->
+        <div class="row mb-5 reveal border-bottom border-white pb-4">
+            <div class="col-12 d-flex justify-content-between align-items-end flex-wrap gap-3">
+                <h2 class="section-title text-uppercase text-white mb-0 lh-1">Education <br>& Academics</h2>
+                <div class="text-end font-monospace text-white-50 d-none d-md-block">
+                    <span>SYS.EDU.DATA_LOG // 01</span><br>
+                    <span>STATUS: COMPLETED</span>
                 </div>
             </div>
+        </div>
+        
+        <div class="row g-5 reveal delay-1">
             
-            <div class="row g-5 reveal delay-1">
-                <!-- Left: University Stats (Terminal Vibe) -->
-                <div class="col-12 col-lg-4">
-                    <div class="edu-stat-box p-4 h-100">
-                        <h3 class="fw-black fs-2 text-uppercase mb-1 text-white">LJ UNIVERSITY[cite: 1]</h3>
-                        <p class="fs-5 fw-bold mb-4" style="color: #00ffcc;">Bachelor of Computer Applications (BCA)[cite: 1]</p>
-                        
-                        <div class="d-flex flex-column gap-3 font-monospace text-uppercase small">
-                            <div class="d-flex justify-content-between border-bottom border-secondary pb-2">
-                                <span class="text-white-50">Timeline</span>
-                                <span>2019 - 2022[cite: 1]</span>
-                            </div>
-                            <div class="d-flex justify-content-between border-bottom border-secondary pb-2">
-                                <span class="text-white-50">Location</span>
-                                <span>Ahmedabad[cite: 1]</span>
-                            </div>
-                            <div class="d-flex justify-content-between border-bottom border-secondary pb-2">
-                                <span class="text-white-50">SEM 6 Score</span>
-                                <span>6.8 / 10.0[cite: 1]</span>
-                            </div>
+            <!-- Left: University Stats (Data Sheet Vibe) -->
+            <div class="col-12 col-lg-4">
+                <div class="data-sheet-box h-100 p-4 p-md-5">
+                    <div class="d-flex justify-content-between align-items-start mb-4">
+                        <div>
+                            <h3 class="fw-black fs-2 text-uppercase mb-1 text-white">LJ University</h3>
+                            <p class="fs-6 fw-bold text-uppercase mb-0 text-white-50">Bachelor of Computer Applications</p>
+                        </div>
+                        <!-- Tech Decorative Element -->
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="white" stroke-width="2">
+                            <rect x="5" y="5" width="30" height="30"></rect>
+                            <circle cx="20" cy="20" r="5"></circle>
+                        </svg>
+                    </div>
+                    
+                    <div class="d-flex flex-column gap-0 font-monospace text-uppercase small mt-5">
+                        <div class="data-row">
+                            <span class="data-label">Timeline</span>
+                            <span class="data-value">2019 - 2022</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Location</span>
+                            <span class="data-value">Ahmedabad</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Degree Type</span>
+                            <span class="data-value">BCA</span>
+                        </div>
+                        <div class="data-row border-bottom-0">
+                            <span class="data-label">SEM 6 Score</span>
+                            <span class="data-value">6.8 / 10.0</span>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Right: Interactive Coursework Matrix -->
-                <div class="col-12 col-lg-8">
-                    <h4 class="fw-bold fs-4 mb-4 text-white">Relevant Coursework & Competencies[cite: 1]</h4>
+            <!-- Right: Coursework Matrix -->
+            <div class="col-12 col-lg-8">
+                <div class="h-100 d-flex flex-column justify-content-center">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <span class="font-monospace text-white-50">[/] COMPETENCIES_MATRIX</span>
+                        <div class="flex-grow-1 border-top border-secondary"></div>
+                    </div>
                     
                     <div class="coursework-matrix">
-                        <!-- Core Languages -->
-                        <span class="course-tag">C</span>
-                        <span class="course-tag">Java</span>
-                        <span class="course-tag">Python</span>
+                        <!-- AI & Data Science (Inverted for focus without using color) -->
+                        <span class="mono-tag tag-filled">Deep Learning</span>
+                        <span class="mono-tag tag-filled">Neural Networks</span>
+                        <span class="mono-tag tag-filled">Large Language Models (LLMs)</span>
+                        <span class="mono-tag tag-filled">Machine Learning</span>
+                        <span class="mono-tag tag-filled">Data Science</span>
                         
-                        <!-- Web & Backend -->
-                        <span class="course-tag">Python-Django</span>
-                        <span class="course-tag">System Software</span>
-                        
-                        <!-- AI & Data Science (Highlighted) -->
-                        <span class="course-tag tag-highlight">Deep Learning</span>
-                        <span class="course-tag tag-highlight">Neural Networks</span>
-                        <span class="course-tag tag-highlight">Large Language Models (LLMs)</span>
-                        <span class="course-tag tag-highlight">Machine Learning</span>
-                        <span class="course-tag tag-highlight">Data Science</span>
+                        <!-- Core Languages & Web -->
+                        <span class="mono-tag">Python</span>
+                        <span class="mono-tag">Python-Django</span>
+                        <span class="mono-tag">C</span>
+                        <span class="mono-tag">Java</span>
+                        <span class="mono-tag">System Software</span>
                         
                         <!-- Emerging Tech -->
-                        <span class="course-tag">Cloud Computing</span>
-                        <span class="course-tag">IoT</span>
-                        <span class="course-tag">Cybersecurity</span>
-                        <span class="course-tag">Android Application Dev</span>
-                        <span class="course-tag">AR/VR Environments</span>
+                        <span class="mono-tag">Cloud Computing</span>
+                        <span class="mono-tag">IoT</span>
+                        <span class="mono-tag">Cybersecurity</span>
+                        <span class="mono-tag">Android Application Dev</span>
+                        <span class="mono-tag">AR/VR Environments</span>
                     </div>
 
-                    <p class="mt-4 fs-6 text-white-50 lh-lg mb-0">
-                        * Gained foundational knowledge across full-stack architecture, machine learning lifecycles, and advanced interactive environments through hands-on academic projects.[cite: 1]
-                    </p>
+                    <div class="mt-5 p-4 border border-secondary font-monospace small text-white-50">
+                        > GAINED FOUNDATIONAL KNOWLEDGE ACROSS FULL-STACK ARCHITECTURE, MACHINE LEARNING LIFECYCLES, AND ADVANCED INTERACTIVE ENVIRONMENTS THROUGH HANDS-ON ACADEMIC PROJECTS.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Advanced CNN Project Section with Live 3D Engine & Classification -->
+<section id="featured-project" class="py-5 bg-black position-relative overflow-hidden border-top border-secondary">
+    
+    <!-- Subtle CRT Scanline Overlay -->
+    <div class="scanlines pointer-events-none z-3"></div>
+
+    <div class="container-fluid px-4 px-md-5 py-5 position-relative z-1">
+        
+        <!-- Section Header -->
+        <div class="row mb-5 reveal">
+            <div class="col-12 d-flex justify-content-between align-items-end border-bottom border-white pb-4">
+                <div>
+                    <span class="font-monospace text-white-50 d-block mb-2">// CORE_ARCHITECTURE_VIZ</span>
+                    <h2 class="section-title text-uppercase text-white mb-0 lh-1">CNN Vision <br>Engine</h2>
+                </div>
+                <div class="text-end d-none d-md-block">
+                    <span class="badge bg-white text-black px-3 py-2 rounded-0 font-monospace border border-white">
+                        <span class="blink-indicator me-2">●</span>LIVE TELEMETRY
+                    </span>
                 </div>
             </div>
         </div>
-    </section>
-   <!-- Strengths Section (Pro Typographic Grid) -->
-    <section id="strengths" class="py-5 border-top border-dark bg-white">
-        <div class="container-fluid px-4 px-md-5 py-5">
-            <div class="row mb-5 reveal">
-                <div class="col-12">
-                    <h2 class="section-title text-uppercase">Core<br>Strengths</h2>
+
+        <div class="row g-0 border border-white reveal delay-1 align-items-stretch" style="min-height: 650px;">
+            
+            <!-- Left: Advanced Project Specs & Image Feeds -->
+            <div class="col-12 col-lg-5 border-end-lg border-white d-flex flex-column bg-black position-relative">
+                <div class="p-4 p-md-5 flex-grow-1">
+                    <h3 class="text-white text-uppercase fw-black mb-1">Anomaly Detection CNN</h3>
+                    <p class="font-monospace text-white-50 small mb-4">v2.4.1 // SPATIAL ANALYSIS</p>
+                    
+                    <p class="text-white-50 font-monospace small mb-4 lh-lg">
+                        > Engineered a deep Convolutional Neural Network (CNN) architecture to process and isolate anomalous data clusters in high-resolution satellite imagery. Implementing max-pooling layers to filter spatial hierarchies.
+                    </p>
+
+                    <!-- Tech Stack Tags -->
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <span class="tech-badge">Python 3.10</span>
+                        <span class="tech-badge">TensorFlow</span>
+                        <span class="tech-badge">CUDA Optimized</span>
+                    </div>
+
+                    <!-- Related Images: Data Feeds -->
+                    <div class="row g-3 mb-5 border-top border-secondary pt-4">
+                        <div class="col-6">
+                            <span class="d-block font-monospace small text-white-50 mb-2">> RAW_INPUT_FEED</span>
+                            <!-- Replace src with the satellite image URL -->
+                            <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcRKwAqLFOe03kSQAHgG5-b4r9DfQP0SpAQJhxNWVvkK3fmKjKOKFEvUSjvOdKLwORs-pSwfj9u8C9PJ6i8" class="img-fluid border border-secondary w-100 feed-img" alt="Satellite Feed">
+                        </div>
+                        <div class="col-6">
+                            <span class="d-block font-monospace small text-white-50 mb-2">> MODEL_SCHEMA</span>
+                            <!-- Replace src with the architecture diagram URL -->
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo4x6ZBTK8r6n3PW_lrlLGLDvFlv9s5KHOejnlF0QIGViho1DCgDuAuybW&s=10" class="img-fluid border border-secondary w-100 feed-img schema-img" alt="CNN Schema">
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Action Button -->
+                <a href="#" class="view-code-btn text-decoration-none text-center p-4 font-monospace fw-bold text-uppercase border-top border-white">
+                    [ ACCESS REPOSITORY ]
+                </a>
+            </div>
+
+            <!-- Right: 3D Interactive Neural Engine -->
+            <div class="col-12 col-lg-7 position-relative bg-black overflow-hidden" id="canvas-container">
+                
+                <!-- Advanced Top HUD Overlay -->
+                <div class="hud-overlay position-absolute top-0 start-0 w-100 p-4 z-2 pointer-events-none d-flex justify-content-between">
+                    <div class="font-monospace small text-white-50">
+                        <span class="d-block text-white mb-1">VIEW: INTERACTIVE_3D</span>
+                        <span class="d-block blink-text">AXIS: FREE_ROTATION</span>
+                    </div>
+                    <div class="font-monospace small text-white-50 text-end">
+                        <span class="d-block mb-1">EPOCH: <span id="hud-epoch">1420</span>/5000</span>
+                        <span class="d-block">FPS: <span id="hud-fps">60</span></span>
+                    </div>
+                </div>
+
+                <!-- Bottom Classification Result HUD -->
+                <div class="position-absolute bottom-0 start-0 w-100 p-4 z-2 pointer-events-none">
+                    <div class="border border-white p-3 classification-box">
+                        <span class="font-monospace text-white-50 small d-block mb-2">> CLASSIFICATION_OUTPUT</span>
+                        <div id="live-classification" class="font-monospace text-white fs-6 fw-bold text-uppercase" style="white-space: pre-line; min-height: 80px;">
+                            INITIALIZING SCANNERS...
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- The 3D Canvas -->
+                <canvas id="cnn-canvas" class="w-100 h-100 cursor-crosshair position-relative z-1"></canvas>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+   <!-- Core Capabilities Section (Server Blade Aesthetic) -->
+<section id="capabilities" class="py-5 bg-black border-top border-secondary position-relative">
+    <div class="container-fluid px-4 px-md-5 py-5">
+        
+        <!-- Header -->
+        <div class="row mb-5 reveal">
+            <div class="col-12 d-flex justify-content-between align-items-end border-bottom border-white pb-4">
+                <div>
+                    <span class="font-monospace text-white-50 d-block mb-2">// SYSTEM_DIAGNOSTICS</span>
+                    <h2 class="section-title text-uppercase text-white mb-0 lh-1">Core<br>Capabilities</h2>
+                </div>
+                <div class="d-none d-md-block text-end font-monospace small text-white-50">
+                    <span>STATUS: OPTIMAL</span><br>
+                    <span class="text-white">4 NODES ACTIVE</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Blade List -->
+        <div class="row reveal delay-1">
+            <div class="col-12">
+                <div class="capabilities-matrix border-top border-white">
+                    
+                    <!-- Node 01 -->
+                    <div class="capability-node border-bottom border-white" onmouseenter="scrambleText(this)">
+                        <div class="node-header d-flex justify-content-between align-items-center py-4 cursor-crosshair">
+                            <div class="d-flex align-items-center gap-4">
+                                <span class="node-id font-monospace text-white-50 fs-5">NODE.01</span>
+                                <h3 class="node-title text-white text-uppercase fw-black mb-0 fs-3" data-value="Algorithmic Optimization">Algorithmic Optimization</h3>
+                            </div>
+                            <div class="node-status font-monospace small text-white-50 d-none d-md-flex align-items-center gap-2">
+                                <span class="led"></span> IDLE
+                            </div>
+                        </div>
+                        <div class="node-body overflow-hidden">
+                            <div class="pb-4 w-75 w-md-50">
+                                <p class="text-white-50 font-monospace mb-3">
+                                    > Adept at tackling complex technical challenges by architecting high-efficiency logic and minimizing retrieval latency for deep learning models and backend APIs.
+                                </p>
+                                <div class="d-flex gap-2">
+                                    <span class="badge border border-white text-white rounded-0">Problem-Solving</span>
+                                    <span class="badge border border-white text-white rounded-0">Performance Tuning</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node 02 -->
+                    <div class="capability-node border-bottom border-white" onmouseenter="scrambleText(this)">
+                        <div class="node-header d-flex justify-content-between align-items-center py-4 cursor-crosshair">
+                            <div class="d-flex align-items-center gap-4">
+                                <span class="node-id font-monospace text-white-50 fs-5">NODE.02</span>
+                                <h3 class="node-title text-white text-uppercase fw-black mb-0 fs-3" data-value="High-Fidelity Data Engineering">High-Fidelity Data Engineering</h3>
+                            </div>
+                            <div class="node-status font-monospace small text-white-50 d-none d-md-flex align-items-center gap-2">
+                                <span class="led"></span> IDLE
+                            </div>
+                        </div>
+                        <div class="node-body overflow-hidden">
+                            <div class="pb-4 w-75 w-md-50">
+                                <p class="text-white-50 font-monospace mb-3">
+                                    > Meticulous in satellite image labeling, metadata ingestion, and systematic anomaly filtering to ensure exceptionally clean arrays for neural network training.
+                                </p>
+                                <div class="d-flex gap-2">
+                                    <span class="badge border border-white text-white rounded-0">Detail Oriented</span>
+                                    <span class="badge border border-white text-white rounded-0">Data Lifecycles</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node 03 -->
+                    <div class="capability-node border-bottom border-white" onmouseenter="scrambleText(this)">
+                        <div class="node-header d-flex justify-content-between align-items-center py-4 cursor-crosshair">
+                            <div class="d-flex align-items-center gap-4">
+                                <span class="node-id font-monospace text-white-50 fs-5">NODE.03</span>
+                                <h3 class="node-title text-white text-uppercase fw-black mb-0 fs-3" data-value="Full-Stack Architecture Agility">Full-Stack Architecture Agility</h3>
+                            </div>
+                            <div class="node-status font-monospace small text-white-50 d-none d-md-flex align-items-center gap-2">
+                                <span class="led"></span> IDLE
+                            </div>
+                        </div>
+                        <div class="node-body overflow-hidden">
+                            <div class="pb-4 w-75 w-md-50">
+                                <p class="text-white-50 font-monospace mb-3">
+                                    > Seamlessly shifting between complex machine learning mechanics, scalable Django web environments, and automated Linux server maintenance.
+                                </p>
+                                <div class="d-flex gap-2">
+                                    <span class="badge border border-white text-white rounded-0">Adaptable</span>
+                                    <span class="badge border border-white text-white rounded-0">End-to-End Dev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Node 04 -->
+                    <div class="capability-node border-bottom border-white" onmouseenter="scrambleText(this)">
+                        <div class="node-header d-flex justify-content-between align-items-center py-4 cursor-crosshair">
+                            <div class="d-flex align-items-center gap-4">
+                                <span class="node-id font-monospace text-white-50 fs-5">NODE.04</span>
+                                <h3 class="node-title text-white text-uppercase fw-black mb-0 fs-3" data-value="Autonomous Deployment & Mentoring">Autonomous Deployment & Mentoring</h3>
+                            </div>
+                            <div class="node-status font-monospace small text-white-50 d-none d-md-flex align-items-center gap-2">
+                                <span class="led"></span> IDLE
+                            </div>
+                        </div>
+                        <div class="node-body overflow-hidden">
+                            <div class="pb-4 w-75 w-md-50">
+                                <p class="text-white-50 font-monospace mb-3">
+                                    > Capable of independent project execution while breaking down highly complex technical paradigms to facilitate knowledge transfer and team collaboration.
+                                </p>
+                                <div class="d-flex gap-2">
+                                    <span class="badge border border-white text-white rounded-0">Team Collaboration</span>
+                                    <span class="badge border border-white text-white rounded-0">Mentorship</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enhanced Research & Data Vault -->
+<section id="data-vault" class="py-5 bg-black border-top border-secondary position-relative overflow-hidden">
+    <div class="container-fluid px-0 py-5">
+        
+        <!-- Section Header -->
+        <div class="px-4 px-md-5 mb-5 reveal">
+            <div class="d-flex justify-content-between align-items-end border-bottom border-white pb-4">
+                <div>
+                    <span class="font-monospace text-white-50 d-block mb-2" style="color: #00ffcc !important;">// SECURE_ARCHIVE</span>
+                    <h2 class="section-title text-uppercase text-white mb-0 lh-1">Data<br>Vault</h2>
+                </div>
+                <div class="d-none d-md-block text-end font-monospace small">
+                    <span class="text-danger blink-text">RESTRICTED CLEARANCE</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scrolling Marquee of Folders with Fade Mask -->
+        <div class="marquee-fade-mask reveal delay-1">
+            <div class="marquee-wrapper border-top border-bottom border-secondary">
+                <div class="marquee-track" id="marquee-track">
+                    <!-- Folders injected via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Glassmorphism Vault Modal -->
+    <div id="vault-modal" class="vault-modal-overlay">
+        <div class="vault-modal-content">
+            
+            <!-- Background Watermark -->
+            <div class="vault-watermark pointer-events-none">CONFIDENTIAL // ARCHIVE</div>
+            
+            <!-- Top Bar -->
+            <div class="d-flex justify-content-between border-bottom border-secondary pb-3 mb-4 position-relative z-1">
+                <div class="font-monospace text-white-50 small">
+                    > DECRYPTING FILE... <span style="color: #00ffcc;">SUCCESS</span>
+                </div>
+                <!-- Simulated Barcode -->
+                <div class="barcode-svg">
+                    <svg width="100" height="20" viewBox="0 0 100 20" fill="white" opacity="0.7">
+                        <rect x="0" width="3" height="20"/><rect x="5" width="1" height="20"/><rect x="8" width="4" height="20"/><rect x="14" width="2" height="20"/><rect x="18" width="1" height="20"/><rect x="22" width="5" height="20"/><rect x="29" width="2" height="20"/><rect x="33" width="1" height="20"/><rect x="36" width="3" height="20"/><rect x="41" width="1" height="20"/><rect x="44" width="4" height="20"/><rect x="50" width="2" height="20"/><rect x="54" width="5" height="20"/><rect x="61" width="1" height="20"/><rect x="64" width="3" height="20"/><rect x="69" width="2" height="20"/><rect x="73" width="1" height="20"/><rect x="76" width="4" height="20"/><rect x="82" width="2" height="20"/><rect x="86" width="1" height="20"/><rect x="89" width="3" height="20"/><rect x="94" width="2" height="20"/><rect x="98" width="2" height="20"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="position-relative z-1">
+                <div class="d-flex gap-2 mb-4">
+                    <span id="modal-clearance" class="badge bg-danger text-white rounded-0 font-monospace border border-danger shadow-sm">TOP SECRET</span>
+                    <span id="modal-date" class="badge border border-secondary text-white-50 rounded-0 font-monospace">2026.03</span>
+                </div>
+                
+                <h3 id="modal-title" class="fw-black text-uppercase text-white mb-4 fs-2" style="letter-spacing: -1px;">Document Title</h3>
+                
+                <p id="modal-abstract" class="font-monospace text-white-50 lh-lg small mb-5">
+                    Loading abstract...
+                </p>
+                
+                <div class="border-top border-secondary pt-4 d-flex justify-content-between align-items-center">
+                    <span class="font-monospace text-white-50 small">> END_OF_FILE</span>
+                    <button onclick="closeVaultModal()" class="close-vault-btn font-monospace fw-bold text-uppercase p-2 px-4">
+                        [ CLOSE CONNECTION ]
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- High-Contrast Agency Footer (Refined Size & Mobile Optimized) -->
+<footer class="footer-light-mode position-relative overflow-hidden border-top border-dark">
+    <div class="container-fluid px-4 px-md-5 py-4 py-md-5">
+        
+        <!-- Scaled-Down Call to Action -->
+        <div class="row mb-4 pb-2 pb-md-4">
+            <div class="col-12">
+                <h2 class="display-footer-text fw-black text-uppercase mb-0 lh-1">Let's Build</h2>
+                <h2 class="display-footer-text text-hollow-dark fw-black text-uppercase mb-0 lh-1">The Future.</h2>
+            </div>
+        </div>
+
+        <!-- Structured Info Grid -->
+        <div class="row g-4 g-lg-5 border-top border-dark pt-4 pt-md-5 align-items-start">
+            
+            <!-- Column 1: Identity -->
+            <div class="col-12 col-md-4">
+                <h5 class="fw-black text-uppercase mb-3 fs-6 tracking-widest text-muted">Identity</h5>
+                <p class="mb-1 fs-5 fw-black text-uppercase text-dark">Faiz Mansuri</p>
+                <p class="font-monospace small fw-bold mb-0 text-dark">AI/ML & SYSTEMS ENGINEER</p>
+            </div>
+            
+            <!-- Column 2: Network Links -->
+            <div class="col-12 col-md-4">
+                <h5 class="fw-black text-uppercase mb-3 fs-6 tracking-widest text-muted">Network</h5>
+                <ul class="list-unstyled d-flex flex-column gap-2 font-monospace mb-0 fw-bold">
+                    <li><a href="#" class="footer-link-light">GITHUB <span class="arrow">↗</span></a></li>
+                    <li><a href="#" class="footer-link-light">LINKEDIN <span class="arrow">↗</span></a></li>
+                    <li><a href="#" class="footer-link-light">EMAIL <span class="arrow">↗</span></a></li>
+                </ul>
+            </div>
+            
+            <!-- Column 3: Availability Badge -->
+            <div class="col-12 col-md-4 text-md-end mt-4 mt-md-0">
+                <div class="availability-badge d-inline-flex align-items-center gap-3 px-3 py-2 border border-dark rounded-pill">
+                    <div class="pulsing-dot-green"></div>
+                    <span class="font-monospace small fw-bold text-uppercase text-dark">Available for projects</span>
                 </div>
             </div>
             
-            <!-- Seamless Brutalist Grid -->
-            <div class="row g-0 border-top border-dark border-start border-dark">
-                
-                <!-- 01 -->
-                <div class="col-12 col-lg-4 strength-box border-bottom border-end border-dark p-4 p-md-5 reveal delay-1">
-                    <div class="strength-bg-num text-hollow d-none d-md-block">01</div>
-                    <div class="position-relative z-1 content-wrapper">
-                        <h4 class="fw-black fs-3 text-uppercase mb-3">Problem-Solving</h4>
-                        <p class="fs-6 fw-medium mb-0 description-text">Adept at tackling complex technical challenges, with a focus on efficiency and optimizing software solutions.</p>
-                    </div>
-                </div>
-
-                <!-- 02 -->
-                <div class="col-12 col-lg-4 strength-box border-bottom border-end border-dark p-4 p-md-5 reveal delay-2">
-                    <div class="strength-bg-num text-hollow d-none d-md-block">02</div>
-                    <div class="position-relative z-1 content-wrapper">
-                        <h4 class="fw-black fs-3 text-uppercase mb-3">Detail Oriented</h4>
-                        <p class="fs-6 fw-medium mb-0 description-text">Meticulous in satellite image labeling and data analysis, ensuring high-quality input for model training and accurate predictions.</p>
-                    </div>
-                </div>
-
-                <!-- 03 -->
-                <div class="col-12 col-lg-4 strength-box border-bottom border-end border-dark p-4 p-md-5 reveal delay-3">
-                    <div class="strength-bg-num text-hollow d-none d-md-block">03</div>
-                    <div class="position-relative z-1 content-wrapper">
-                        <h4 class="fw-black fs-3 text-uppercase mb-3">Adaptable</h4>
-                        <p class="fs-6 fw-medium mb-0 description-text">Quick to learn new technologies and tools, and always enthusiastic about applying them to real-world problems.</p>
-                    </div>
-                </div>
-
-                <!-- 04 (Wider on Desktop) -->
-                <div class="col-12 col-lg-6 strength-box border-bottom border-end border-dark p-4 p-md-5 reveal delay-1">
-                    <div class="strength-bg-num text-hollow d-none d-md-block">04</div>
-                    <div class="position-relative z-1 content-wrapper">
-                        <h4 class="fw-black fs-3 text-uppercase mb-3">Team Collaboration</h4>
-                        <p class="fs-6 fw-medium mb-0 description-text">Excellent communicator with experience working in collaborative environments, able to work both independently and as part of a team to meet project goals.</p>
-                    </div>
-                </div>
-
-                <!-- 05 (Wider on Desktop) -->
-                <div class="col-12 col-lg-6 strength-box border-bottom border-end border-dark p-4 p-md-5 reveal delay-2">
-                    <div class="strength-bg-num text-hollow d-none d-md-block">05</div>
-                    <div class="position-relative z-1 content-wrapper">
-                        <h4 class="fw-black fs-3 text-uppercase mb-3">Mentoring</h4>
-                        <p class="fs-6 fw-medium mb-0 description-text">Skilled at breaking down complex technical concepts into understandable lessons, fostering a positive learning environment.</p>
-                    </div>
-                </div>
-
+        </div>
+        
+        <!-- Copyright line -->
+        <div class="row mt-5 pt-3 border-top border-dark border-opacity-10">
+            <div class="col-12 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 font-monospace small fw-bold text-muted">
+                <span>&copy; 2026 // END_OF_FILE</span>
+                <span>ENGINEERED IN AHMEDABAD</span>
             </div>
         </div>
-    </section>
-
-    <footer class="py-5 bg-black text-white">
-        <div class="container-fluid px-4 px-md-5 d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <h2 class="fw-black text-uppercase mb-3 mb-md-0 fs-4">Faiz Mansuri</h2>
-            <p class="text-white-50 small mb-0 fw-bold text-uppercase">&copy; 2026. Built for impact.</p>
-        </div>
-    </footer>
-
+        
+    </div>
+</footer>
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
