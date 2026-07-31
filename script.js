@@ -711,7 +711,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const track = document.getElementById("marquee-track");
     if (!track) return;
 
-    // Create folder HTML
+   // Create folder HTML
     const createFolderHTML = (item) => `
         <div class="vault-folder" onclick="openVaultModal('${item.id}')">
             <div class="d-flex justify-content-between align-items-start">
@@ -722,9 +722,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     </svg>
                 </div>
             </div>
-            <h4 class="text-white fw-bold fs-5 mb-0 mt-3 folder-title" style="transition: color 0.3s ease;">${item.title}</h4>
-            <div class="mt-4 pt-3 border-top border-secondary d-flex justify-content-between align-items-center">
-                <span class="badge ${item.clearance === 'TOP SECRET' ? 'bg-danger text-white border-danger' : 'border-white text-white-50'} border rounded-0 font-monospace">
+            
+            <h4 class="text-white fw-bold fs-5 mb-4 mt-3 folder-title" style="transition: color 0.3s ease;">${item.title}</h4>
+            
+            <!-- CHANGED: mt-4 to mt-auto to push the footer to the bottom -->
+            <div class="mt-auto pt-3 border-top border-secondary d-flex justify-content-between align-items-center">
+                <!-- CHANGED: Added text-truncate and max-width to prevent horizontal overflow -->
+                <span class="badge ${item.clearance === 'TOP SECRET' ? 'bg-danger text-white border-danger' : 'border-white text-white-50'} border rounded-0 font-monospace text-truncate" style="max-width: 75%;">
                     ${item.clearance}
                 </span>
                 <span class="font-monospace small text-white-50">>>></span>
@@ -944,4 +948,180 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update immediately, then every second
     updateClock();
     setInterval(updateClock, 1000);
+});
+
+
+// --- ADVANCED NEURAL ECOSYSTEM ENGINE ---
+document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.getElementById('constellation-wrapper');
+    const svg = document.getElementById('constellation-lines');
+    const nodes = document.querySelectorAll('.tech-node');
+    
+    if (!wrapper || !svg || nodes.length === 0) return;
+
+    let activeElements = []; // Store lines and data packets to clear later
+
+    // Helper: Get coordinates
+    function getCenterCoords(element) {
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const rect = element.getBoundingClientRect();
+        return {
+            x: (rect.left - wrapperRect.left) + (rect.width / 2),
+            y: (rect.top - wrapperRect.top) + (rect.height / 2)
+        };
+    }
+
+    // Engine: Draw curves and moving data packets
+    function drawConnections(sourceNode) {
+        clearConnections();
+        
+        const connectsAttr = sourceNode.getAttribute('data-connects');
+        if (!connectsAttr) return;
+        
+        const targets = connectsAttr.split(',');
+        const sourceCoords = getCenterCoords(sourceNode);
+        
+        wrapper.classList.add('mapping-active');
+        sourceNode.classList.add('active-source');
+
+        targets.forEach((targetSkill, index) => {
+            const targetNode = document.querySelector(`.tech-node[data-skill="${targetSkill.trim()}"]`);
+            if (targetNode) {
+                targetNode.classList.add('active-target');
+                const targetCoords = getCenterCoords(targetNode);
+                
+                // 1. Calculate a fluid Bezier Curve
+                // Control points pull the line to make an organic "S" curve
+                const cp1x = sourceCoords.x;
+                const cp1y = targetCoords.y;
+                const cp2x = targetCoords.x;
+                const cp2y = sourceCoords.y;
+                
+                const pathString = `M ${sourceCoords.x} ${sourceCoords.y} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${targetCoords.x} ${targetCoords.y}`;
+                const pathId = `arc-${index}-${Date.now()}`; // Unique ID for motion path
+
+                // 2. Create the SVG Path (The Energy Line)
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', pathString);
+                path.setAttribute('id', pathId);
+                path.classList.add('circuit-path');
+                
+                // Animate the line drawing in
+                // Using an estimated length for the dash array
+                const length = Math.sqrt(Math.pow(targetCoords.x - sourceCoords.x, 2) + Math.pow(targetCoords.y - sourceCoords.y, 2)) * 1.5;
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+                
+                svg.appendChild(path);
+                activeElements.push(path);
+
+                // 3. Create the Data Packet (The Traveling Glow Dot)
+                const packet = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                packet.setAttribute('r', '3');
+                packet.setAttribute('fill', '#ffffff');
+                packet.style.filter = 'drop-shadow(0 0 5px #ffffff)';
+                
+                // SVG Animation magic to move the dot along the curved path
+                const motion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+                motion.setAttribute('dur', '1.2s'); // Speed of the packet
+                motion.setAttribute('repeatCount', 'indefinite');
+                
+                const mpath = document.createElementNS('http://www.w3.org/2000/svg', 'mpath');
+                mpath.setAttribute('href', `#${pathId}`);
+                
+                motion.appendChild(mpath);
+                packet.appendChild(motion);
+                svg.appendChild(packet);
+                
+                activeElements.push(packet);
+            }
+        });
+    }
+
+    function clearConnections() {
+        wrapper.classList.remove('mapping-active');
+        nodes.forEach(n => {
+            n.classList.remove('active-source', 'active-target');
+        });
+        activeElements.forEach(el => el.remove());
+        activeElements = [];
+    }
+
+    // Attach Event Listeners
+    nodes.forEach(node => {
+        node.addEventListener('mouseenter', () => drawConnections(node));
+        node.addEventListener('touchstart', (e) => {
+            e.preventDefault(); 
+            drawConnections(node);
+        }, {passive: false});
+    });
+
+    wrapper.addEventListener('mouseleave', clearConnections);
+    document.addEventListener('touchstart', (e) => {
+        if (!wrapper.contains(e.target)) clearConnections();
+    });
+
+    window.addEventListener('resize', () => {
+        const activeSource = document.querySelector('.tech-node.active-source');
+        if (activeSource) drawConnections(activeSource);
+    });
+});
+
+// --- ADVANCED OPERATOR DOSSIER TYPING NARRATIVE (ISOLATED) ---
+document.addEventListener("DOMContentLoaded", () => {
+    const dossierTextContainer = document.getElementById('dossier-text');
+    if (!dossierTextContainer) return;
+
+    // Detailed narrative text
+    const dossierNarrative = "> INITIALIZING BIOMETRIC SCAN...<br>> MATCH CONFIRMED: MANSURI.F<br><br>I am an AI/ML & Systems Engineer obsessed with transforming raw data into highly optimized architectural structures.<br><br>Operating fluidly across the stack, I specialize in bridging the gap between heavy computational models and seamless deployment. My workflow frequently involves administering headless Linux server nodes remotely from a Windows host environment, ensuring secure, zero-downtime integration for complex machine learning pipelines.<br><br>Beyond core algorithms and deep convolutional networks, my expertise extends into advanced web infrastructure. I architect robust, scalable backends utilizing Django, deliberately bypassing standard template limitations to engineer highly customized, data-rich HTML and CSS front-end interfaces from the ground up.<br><br>I don't just write code; I construct resilient, end-to-end ecosystems. From meticulous satellite image data ingestion to full-scale web deployment, my drive is rooted in relentless problem-solving and uncompromised architectural efficiency.";
+    
+    // Split the string by HTML tags
+    const dossierTextArray = dossierNarrative.split(/(<br>)/g);
+    
+    // Unique variables so it doesn't conflict with the Experience Terminal
+    let dossierChunkIndex = 0;
+    let dossierCharIndex = 0;
+    let dossierIsTyping = false;
+
+    // Unique function name
+    function runDossierTyper() {
+        if (dossierChunkIndex < dossierTextArray.length) {
+            const currentChunk = dossierTextArray[dossierChunkIndex];
+            
+            if (currentChunk === "<br>") {
+                dossierTextContainer.innerHTML += "<br>";
+                dossierChunkIndex++;
+                setTimeout(runDossierTyper, 10);
+            } 
+            else if (dossierCharIndex < currentChunk.length) {
+                dossierTextContainer.innerHTML += currentChunk.charAt(dossierCharIndex);
+                dossierCharIndex++;
+                
+                // Fast terminal-style typing speed
+                let typeSpeed = Math.random() * 15 + 5;
+                setTimeout(runDossierTyper, typeSpeed);
+            } 
+            else {
+                dossierChunkIndex++;
+                dossierCharIndex = 0;
+                setTimeout(runDossierTyper, 10);
+            }
+        }
+    }
+
+    // Unique Observer
+    const dossierObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !dossierIsTyping) {
+                dossierIsTyping = true;
+                setTimeout(runDossierTyper, 500);
+            }
+        });
+    }, { threshold: 0.2 }); 
+
+    // Target the specific dossier terminal window
+    const dossierTerminal = document.querySelector('#about .terminal-window');
+    if (dossierTerminal) {
+        dossierObserver.observe(dossierTerminal);
+    }
 });
