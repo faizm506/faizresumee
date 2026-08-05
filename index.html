@@ -117,6 +117,99 @@
         </div>
     </div>
 </section>
+
+<!-- Architecture Blueprint (Live Data Flow) -->
+<section id="architecture-blueprint" class="py-5 bg-black border-top border-secondary position-relative overflow-hidden blueprint-bg">
+    
+    <!-- Blueprint Grid Overlay -->
+    <div class="blueprint-grid pointer-events-none"></div>
+
+    <div class="container-fluid px-3 px-md-5 py-5 position-relative z-1">
+        
+        <!-- Section Header -->
+        <div class="row mb-5 reveal">
+            <div class="col-12 d-flex justify-content-between align-items-end border-bottom border-white pb-3">
+                <div>
+                    <span class="font-monospace d-block mb-2" style="color: #00ffcc;">// SYSTEM_ARCHITECTURE</span>
+                    <h2 class="section-title text-uppercase text-white mb-0 lh-1 fs-3">Data Flow<br>Blueprint</h2>
+                </div>
+                <div class="d-none d-md-block text-end font-monospace small text-white-50">
+                    <span>TOPOLOGY: <span class="text-success">FULL-STACK END-TO-END</span></span><br>
+                    <span>HOVER [INFERENCE_ENGINE] TO TRIGGER PROCESSING</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Live Data Flow Engine -->
+        <div class="row justify-content-center reveal delay-1">
+            <div class="col-12 col-xl-11">
+                
+                <div id="arch-container" class="d-flex flex-column flex-lg-row align-items-center justify-content-between w-100 py-4">
+                    
+                    <!-- NODE 1: Client UI -->
+                    <div class="arch-node text-center p-3 p-md-4">
+                        <div class="node-icon mb-3">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                        <h5 class="font-monospace text-white fw-bold mb-1">CLIENT_UI</h5>
+                        <p class="font-monospace text-white-50 small mb-0" style="font-size: 0.7rem;">Custom HTML/CSS<br>Frontend Interface</p>
+                    </div>
+
+                    <!-- PIPELINE 1 (Client to Django) -->
+                    <div class="arch-pipeline">
+                        <div class="data-packet forward"></div>
+                        <div class="data-packet forward delay-1"></div>
+                        <div class="data-packet reverse d-none"></div>
+                        <div class="data-packet reverse delay-1 d-none"></div>
+                    </div>
+
+                    <!-- NODE 2: Django Core -->
+                    <div class="arch-node text-center p-3 p-md-4">
+                        <div class="node-icon mb-3">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                            </svg>
+                        </div>
+                        <h5 class="font-monospace text-white fw-bold mb-1">DJANGO_ROUTER</h5>
+                        <p class="font-monospace text-white-50 small mb-0" style="font-size: 0.7rem;">API Gateway &<br>Postgres Database</p>
+                    </div>
+
+                    <!-- PIPELINE 2 (Django to CNN) -->
+                    <div class="arch-pipeline">
+                        <div class="data-packet forward"></div>
+                        <div class="data-packet forward delay-1"></div>
+                        <div class="data-packet reverse d-none"></div>
+                        <div class="data-packet reverse delay-1 d-none"></div>
+                    </div>
+
+                    <!-- NODE 3: CNN Inference Engine (Interactive) -->
+                    <div id="cnn-engine-node" class="arch-node interactive-node text-center p-3 p-md-4 cursor-pointer">
+                        <div class="node-icon mb-3 position-relative">
+                            <!-- Brain/Network Icon -->
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00ffcc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="brain-icon">
+                                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path>
+                                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path>
+                            </svg>
+                            <!-- Processing Rings that appear on hover -->
+                            <div class="processing-ring ring-1"></div>
+                            <div class="processing-ring ring-2"></div>
+                        </div>
+                        <h5 class="font-monospace text-white fw-bold mb-1 engine-title">CNN_INFERENCE</h5>
+                        <p class="font-monospace text-white-50 small mb-0" style="font-size: 0.7rem;">Deep Learning Model<br>(Hover to Execute)</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
     <!-- Education Section (Monochrome Technical Dossier) -->
 <section id="education" class="edu-bw-section position-relative overflow-hidden">
     
@@ -308,6 +401,112 @@
                 <canvas id="cnn-canvas" class="w-100 h-100 cursor-crosshair position-relative z-1"></canvas>
             </div>
 
+        </div>
+    </div>
+</section>
+
+<!-- Hyper-Realistic htop Diagnostic Dashboard -->
+<section id="diagnostic-dashboard" class="py-5 bg-black border-top border-secondary position-relative overflow-hidden">
+    
+    <div class="container-fluid px-2 px-md-4 py-5 position-relative z-1">
+        
+        <div class="row mb-4 reveal">
+            <div class="col-12 d-flex justify-content-between align-items-end border-bottom border-white pb-3">
+                <div>
+                    <span class="font-monospace d-block mb-2" style="color: #00ffcc;">// SYSTEM_DIAGNOSTICS</span>
+                    <h2 class="section-title text-uppercase text-white mb-0 lh-1 fs-3">Live Server<br>Telemetry</h2>
+                </div>
+                <div class="d-none d-md-block text-end font-monospace small text-white-50">
+                    <span>HOST: <span style="color: #00ffcc;">UBUNTU 24.04 LTS</span></span><br>
+                    <span>MONITORING INPUT LATENCY</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row reveal delay-1">
+            <div class="col-12">
+                <!-- The CRT Terminal Container -->
+                <div class="htop-terminal position-relative overflow-hidden p-2 p-md-3 font-monospace">
+                    
+                    <!-- CRT Scanline Overlay -->
+                    <div class="terminal-scanlines pointer-events-none"></div>
+
+                    <!-- htop Header: CPU & Memory -->
+                    <div class="row g-2 g-md-4 mb-3 position-relative z-1">
+                        
+                        <!-- Left Column: Cores and Mem -->
+                        <div class="col-12 col-lg-6 d-flex flex-column gap-1">
+                            
+                            <!-- CPU Cores (Generated dynamically in JS to save HTML space) -->
+                            <div id="cpu-cores-container" class="d-flex flex-column gap-1"></div>
+                            
+                            <!-- Memory & Swap -->
+                            <div class="d-flex align-items-center mt-1 htop-row">
+                                <span class="htop-label">Mem</span>
+                                <span class="htop-bracket">[</span>
+                                <div class="htop-bar-track flex-grow-1 position-relative">
+                                    <div class="htop-mem-used" style="width: 42%;"></div>
+                                    <div class="htop-mem-buffers" style="width: 15%; left: 42%;"></div>
+                                    <div class="htop-mem-cache" style="width: 20%; left: 57%;"></div>
+                                    <span class="htop-bar-text" id="mem-text">13.4G/32.0G</span>
+                                </div>
+                                <span class="htop-bracket">]</span>
+                            </div>
+                            
+                            <div class="d-flex align-items-center htop-row">
+                                <span class="htop-label">Swp</span>
+                                <span class="htop-bracket">[</span>
+                                <div class="htop-bar-track flex-grow-1 position-relative">
+                                    <div class="htop-swp-used" style="width: 2%;"></div>
+                                    <span class="htop-bar-text">64.0M/2.00G</span>
+                                </div>
+                                <span class="htop-bracket">]</span>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: System Stats -->
+                        <div class="col-12 col-lg-6 d-flex flex-column justify-content-start text-terminal-white small">
+                            <div class="d-flex justify-content-between pe-md-4">
+                                <span>Tasks: <span class="terminal-cyan">142</span>, <span class="terminal-cyan">300</span> thr; <span id="running-tasks" class="terminal-cyan">2</span> running</span>
+                            </div>
+                            <div class="d-flex justify-content-between pe-md-4">
+                                <span>Load average: <span id="load-avg">0.14 0.22 0.25</span></span>
+                            </div>
+                            <div class="d-flex justify-content-between pe-md-4">
+                                <span>Uptime: <span id="htop-uptime">00:00:00</span></span>
+                            </div>
+                            <div class="mt-2 text-terminal-green">
+                                <span>> USER_INPUT_STREAM: </span><span id="input-status" class="terminal-white blink-text">WAITING</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Process List Table -->
+                    <div class="table-responsive position-relative z-1 mt-3">
+                        <table class="table table-borderless table-sm mb-0 htop-table w-100">
+                            <thead>
+                                <tr class="terminal-bg-green text-black">
+                                    <th class="ps-2">PID</th>
+                                    <th>USER</th>
+                                    <th class="d-none d-md-table-cell">PRI</th>
+                                    <th class="d-none d-md-table-cell">NI</th>
+                                    <th class="d-none d-lg-table-cell">VIRT</th>
+                                    <th class="d-none d-lg-table-cell">RES</th>
+                                    <th class="d-none d-lg-table-cell">SHR</th>
+                                    <th>S</th>
+                                    <th>CPU%</th>
+                                    <th>MEM%</th>
+                                    <th>TIME+</th>
+                                    <th>Command</th>
+                                </tr>
+                            </thead>
+                            <tbody id="htop-process-body">
+                                <!-- Process rows injected by JS for live sorting -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -612,6 +811,185 @@
                                     <span class="badge border border-white text-white rounded-0">Mentorship</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CI/CD Server Rack (Hyper-Realistic) -->
+<section id="deployment-rack" class="py-5 bg-black border-top border-secondary position-relative overflow-hidden">
+    
+    <div class="container-fluid px-2 px-md-4 py-5 position-relative z-1">
+        
+        <div class="row mb-5 reveal">
+            <div class="col-12 d-flex justify-content-between align-items-end border-bottom border-white pb-3">
+                <div>
+                    <span class="font-monospace d-block mb-2" style="color: #00ffcc;">// PRODUCTION_ENV</span>
+                    <h2 class="section-title text-uppercase text-white mb-0 lh-1 fs-3">Active<br>Deployments</h2>
+                </div>
+                <div class="d-none d-md-block text-end font-monospace small text-white-50">
+                    <span>RACK_STATUS: <span class="text-success">ONLINE</span></span><br>
+                    <span>HOVER/TAP TO INITIATE BOOT SEQUENCE</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center reveal delay-1">
+            <div class="col-12 col-xl-10">
+                <div class="server-rack p-2 p-md-3 rounded-2 position-relative">
+                    
+                    <!-- Rack Mounting Rails with Screw Holes -->
+                    <div class="rack-rail left d-flex flex-column justify-content-around align-items-center py-2">
+                        <div class="rack-screw"></div><div class="rack-screw"></div><div class="rack-screw"></div>
+                    </div>
+                    <div class="rack-rail right d-flex flex-column justify-content-around align-items-center py-2">
+                        <div class="rack-screw"></div><div class="rack-screw"></div><div class="rack-screw"></div>
+                    </div>
+
+                    <!-- BLADE 42U: Django API -->
+                    <div class="server-blade d-flex align-items-stretch mb-3" onmouseenter="bootServer(this)" onmouseleave="shutdownServer(this)" onclick="toggleServerMobile(this)">
+                        <!-- Left Handle & Unit Number -->
+                        <div class="blade-handle left-handle d-none d-md-flex flex-column align-items-center justify-content-between py-2">
+                            <div class="handle-grip"></div>
+                            <span class="u-marker font-monospace">42U</span>
+                            <div class="handle-grip"></div>
+                        </div>
+                        
+                        <!-- Power & Status LEDs -->
+                        <div class="blade-control-panel d-flex flex-column justify-content-between align-items-center px-2 px-md-3 py-2 border-end border-dark">
+                            <div class="power-button"></div>
+                            <div class="d-flex flex-column gap-2 mt-2">
+                                <div class="led led-net" title="Network"></div>
+                                <div class="led led-hdd" title="Storage"></div>
+                            </div>
+                        </div>
+
+                        <!-- LCD Screen -->
+                        <div class="blade-lcd flex-grow-1 p-2 p-md-3 mx-2 mx-md-3 position-relative overflow-hidden">
+                            <div class="lcd-scanlines pointer-events-none"></div>
+                            <div class="lcd-content d-flex flex-column h-100 justify-content-center">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <span class="font-monospace fw-bold fs-6 fs-md-5 project-title">DJANGO_CORE_API</span>
+                                    <span class="badge deploy-status font-monospace small">OFFLINE</span>
+                                </div>
+                                <p class="font-monospace mb-2 small project-desc" style="font-size: 0.75rem;">High-frequency geospatial data routing bypassing standard template limitations for custom front-end injection.</p>
+                                
+                                <div class="d-flex justify-content-between align-items-end mt-auto">
+                                    <div class="d-flex gap-2 font-monospace tech-tags" style="font-size: 0.7rem;">
+                                        <span>[PYTHON]</span><span>[DJANGO]</span><span>[POSTGRES]</span>
+                                    </div>
+                                    <!-- Live Equalizer Graph -->
+                                    <div class="network-graph d-flex align-items-end gap-1">
+                                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                                    </div>
+                                </div>
+                                <a href="#" class="blade-link font-monospace mt-2">> ESTABLISH_SSH_TUNNEL</a>
+                            </div>
+                        </div>
+
+                        <!-- Cooling Fans & Vents -->
+                        <div class="blade-cooling d-flex align-items-center gap-2 pe-2 pe-md-3 border-start border-dark ps-2 ps-md-3 position-relative">
+                            <div class="vent-grill pointer-events-none"></div>
+                            <div class="fan-unit"><div class="fan-blades"></div></div>
+                            <div class="fan-unit d-none d-sm-block"><div class="fan-blades"></div></div>
+                        </div>
+
+                        <div class="blade-handle right-handle d-none d-md-flex flex-column align-items-center justify-content-between py-2">
+                            <div class="handle-grip"></div><div class="handle-grip"></div>
+                        </div>
+                    </div>
+
+                    <!-- BLADE 41U: CNN Architecture -->
+                    <div class="server-blade d-flex align-items-stretch mb-3" onmouseenter="bootServer(this)" onmouseleave="shutdownServer(this)" onclick="toggleServerMobile(this)">
+                        <div class="blade-handle left-handle d-none d-md-flex flex-column align-items-center justify-content-between py-2">
+                            <div class="handle-grip"></div><span class="u-marker font-monospace">41U</span><div class="handle-grip"></div>
+                        </div>
+                        
+                        <div class="blade-control-panel d-flex flex-column justify-content-between align-items-center px-2 px-md-3 py-2 border-end border-dark">
+                            <div class="power-button"></div>
+                            <div class="d-flex flex-column gap-2 mt-2">
+                                <div class="led led-net"></div>
+                                <div class="led led-hdd"></div>
+                            </div>
+                        </div>
+
+                        <div class="blade-lcd flex-grow-1 p-2 p-md-3 mx-2 mx-md-3 position-relative overflow-hidden">
+                            <div class="lcd-scanlines pointer-events-none"></div>
+                            <div class="lcd-content d-flex flex-column h-100 justify-content-center">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <span class="font-monospace fw-bold fs-6 fs-md-5 project-title">CNN_ANOMALY_DETECTOR</span>
+                                    <span class="badge deploy-status font-monospace small">OFFLINE</span>
+                                </div>
+                                <p class="font-monospace mb-2 small project-desc" style="font-size: 0.75rem;">Deep convolutional networks engineered for rapid ingestion and analysis of dense image datasets.</p>
+                                <div class="d-flex justify-content-between align-items-end mt-auto">
+                                    <div class="d-flex gap-2 font-monospace tech-tags" style="font-size: 0.7rem;">
+                                        <span>[TENSORFLOW]</span><span>[KERAS]</span><span>[OPENCV]</span>
+                                    </div>
+                                    <div class="network-graph d-flex align-items-end gap-1">
+                                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                                    </div>
+                                </div>
+                                <a href="#" class="blade-link font-monospace mt-2">> ESTABLISH_SSH_TUNNEL</a>
+                            </div>
+                        </div>
+
+                        <div class="blade-cooling d-flex align-items-center gap-2 pe-2 pe-md-3 border-start border-dark ps-2 ps-md-3 position-relative">
+                            <div class="vent-grill pointer-events-none"></div>
+                            <div class="fan-unit"><div class="fan-blades"></div></div>
+                            <div class="fan-unit d-none d-sm-block"><div class="fan-blades"></div></div>
+                        </div>
+
+                        <div class="blade-handle right-handle d-none d-md-flex flex-column align-items-center justify-content-between py-2">
+                            <div class="handle-grip"></div><div class="handle-grip"></div>
+                        </div>
+                    </div>
+
+                    <!-- BLADE 40U: Linux Automation -->
+                    <div class="server-blade d-flex align-items-stretch mb-2" onmouseenter="bootServer(this)" onmouseleave="shutdownServer(this)" onclick="toggleServerMobile(this)">
+                        <div class="blade-handle left-handle d-none d-md-flex flex-column align-items-center justify-content-between py-2">
+                            <div class="handle-grip"></div><span class="u-marker font-monospace">40U</span><div class="handle-grip"></div>
+                        </div>
+                        
+                        <div class="blade-control-panel d-flex flex-column justify-content-between align-items-center px-2 px-md-3 py-2 border-end border-dark">
+                            <div class="power-button"></div>
+                            <div class="d-flex flex-column gap-2 mt-2">
+                                <div class="led led-net"></div>
+                                <div class="led led-hdd"></div>
+                            </div>
+                        </div>
+
+                        <div class="blade-lcd flex-grow-1 p-2 p-md-3 mx-2 mx-md-3 position-relative overflow-hidden">
+                            <div class="lcd-scanlines pointer-events-none"></div>
+                            <div class="lcd-content d-flex flex-column h-100 justify-content-center">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <span class="font-monospace fw-bold fs-6 fs-md-5 project-title">SYS_PROVISION_NODE</span>
+                                    <span class="badge deploy-status font-monospace small">OFFLINE</span>
+                                </div>
+                                <p class="font-monospace mb-2 small project-desc" style="font-size: 0.75rem;">Automated bash scripting framework for zero-downtime remote management of headless Linux environments.</p>
+                                <div class="d-flex justify-content-between align-items-end mt-auto">
+                                    <div class="d-flex gap-2 font-monospace tech-tags" style="font-size: 0.7rem;">
+                                        <span>[BASH]</span><span>[UBUNTU]</span><span>[CRON]</span>
+                                    </div>
+                                    <div class="network-graph d-flex align-items-end gap-1">
+                                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                                    </div>
+                                </div>
+                                <a href="#" class="blade-link font-monospace mt-2">> ESTABLISH_SSH_TUNNEL</a>
+                            </div>
+                        </div>
+
+                        <div class="blade-cooling d-flex align-items-center gap-2 pe-2 pe-md-3 border-start border-dark ps-2 ps-md-3 position-relative">
+                            <div class="vent-grill pointer-events-none"></div>
+                            <div class="fan-unit"><div class="fan-blades"></div></div>
+                            <div class="fan-unit d-none d-sm-block"><div class="fan-blades"></div></div>
+                        </div>
+
+                        <div class="blade-handle right-handle d-none d-md-flex flex-column align-items-center justify-content-between py-2">
+                            <div class="handle-grip"></div><div class="handle-grip"></div>
                         </div>
                     </div>
 

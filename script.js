@@ -1125,3 +1125,258 @@ document.addEventListener("DOMContentLoaded", () => {
         dossierObserver.observe(dossierTerminal);
     }
 });
+
+// --- ADVANCED HTOP TERMINAL ENGINE ---
+document.addEventListener("DOMContentLoaded", () => {
+    const dashboard = document.getElementById('diagnostic-dashboard');
+    if (!dashboard) return;
+
+    const coreCount = 4; // Generate 4 CPU cores
+    const coresContainer = document.getElementById('cpu-cores-container');
+    const processBody = document.getElementById('htop-process-body');
+    const loadAvgText = document.getElementById('load-avg');
+    const inputStatusText = document.getElementById('input-status');
+    const uptimeText = document.getElementById('htop-uptime');
+    
+    // 1. Generate CPU Core DOM Elements
+    let cpuUI = [];
+    for(let i=1; i<=coreCount; i++) {
+        const coreHTML = `
+            <div class="d-flex align-items-center htop-row">
+                <span class="htop-label">${i}</span>
+                <span class="htop-bracket">[</span>
+                <div class="htop-bar-track flex-grow-1 position-relative">
+                    <div class="htop-cpu-user" id="cpu-user-${i}" style="width: 0%;"></div>
+                    <div class="htop-cpu-sys" id="cpu-sys-${i}" style="width: 0%; left: 0%;"></div>
+                    <span class="htop-bar-text" id="cpu-text-${i}">0.0%</span>
+                </div>
+                <span class="htop-bracket">]</span>
+            </div>
+        `;
+        coresContainer.insertAdjacentHTML('beforeend', coreHTML);
+        cpuUI.push({
+            user: document.getElementById(`cpu-user-${i}`),
+            sys: document.getElementById(`cpu-sys-${i}`),
+            text: document.getElementById(`cpu-text-${i}`)
+        });
+    }
+
+    // 2. Process List Data (Realistic Portfolio Environment)
+    let processes = [
+        { pid: 1024, user: 'root', pri: 20, ni: 0, virt: '420M', res: '112M', shr: '44M', s: 'R', cpu: 0, mem: 4.2, time: '14:22.10', cmd: '/usr/bin/ui_engine --track-input' },
+        { pid: 4092, user: 'fm_sys', pri: 20, ni: 0, virt: '4.2G', res: '1.8G', shr: '256M', s: 'S', cpu: 0, mem: 28.4, time: '08:11.45', cmd: 'python3 train_cnn_architecture.py' },
+        { pid: 2108, user: 'fm_sys', pri: 20, ni: 0, virt: '840M', res: '120M', shr: '18M', s: 'S', cpu: 0, mem: 3.8, time: '02:44.11', cmd: 'gunicorn core.wsgi:application' },
+        { pid: 3110, user: 'root', pri: 20, ni: 0, virt: '210M', res: '88M', shr: '14M', s: 'S', cpu: 0, mem: 1.2, time: '00:14.90', cmd: 'dockerd --host=fd://' },
+        { pid: 1, user: 'root', pri: 20, ni: 0, virt: '168M', res: '11M', shr: '8M', s: 'S', cpu: 0, mem: 0.1, time: '01:10.02', cmd: '/sbin/init' }
+    ];
+
+    // State Variables
+    let targetLoad = 2; 
+    let currentLoad = 2;
+    let inputTimeout;
+    let uptimeSeconds = 18450; // Starts at ~5 hours
+
+    // Uptime & Clock
+    setInterval(() => {
+        uptimeSeconds++;
+        const hrs = String(Math.floor(uptimeSeconds / 3600)).padStart(2, '0');
+        const mins = String(Math.floor((uptimeSeconds % 3600) / 60)).padStart(2, '0');
+        const secs = String(uptimeSeconds % 60).padStart(2, '0');
+        uptimeText.innerText = `${hrs}:${mins}:${secs}`;
+    }, 1000);
+
+    // 3. User Input Tracking (Mouse & Scroll)
+    function registerInput(intensity) {
+        targetLoad = Math.min(100, targetLoad + intensity);
+        inputStatusText.innerText = "STREAM_ACTIVE";
+        inputStatusText.style.color = "#00ff00";
+
+        clearTimeout(inputTimeout);
+        inputTimeout = setTimeout(() => {
+            targetLoad = 2; 
+            inputStatusText.innerText = "WAITING";
+            inputStatusText.style.color = "#e5e5e5";
+        }, 400);
+    }
+
+    window.addEventListener('mousemove', () => registerInput(3));
+    window.addEventListener('scroll', () => registerInput(12));
+
+    // 4. Render Engine (60 FPS)
+    function renderHtop() {
+        // Smoothly ease currentLoad
+        currentLoad += (targetLoad - currentLoad) * 0.1;
+
+        // Load Avg
+        const fakeLoad = (currentLoad / 25).toFixed(2);
+        loadAvgText.innerText = `${fakeLoad} 0.22 0.25`;
+
+        // Distribute load to Cores
+        cpuUI.forEach(core => {
+            let coreLoad = currentLoad + (Math.random() * 15 - 5);
+            coreLoad = Math.max(0.2, Math.min(100, coreLoad));
+            
+            // htop splits load into User (green) and System (red)
+            let sysLoadRatio = 0.2 + (Math.random() * 0.2); // Sys is usually 20-40% of total load
+            let sysLoad = coreLoad * sysLoadRatio;
+            let userLoad = coreLoad - sysLoad;
+
+            core.user.style.width = `${userLoad}%`;
+            
+            // Position the Sys bar exactly where the User bar ends
+            core.sys.style.left = `${userLoad}%`;
+            core.sys.style.width = `${sysLoad}%`;
+            
+            core.text.innerText = `${coreLoad.toFixed(1)}%`;
+        });
+
+        // Update Processes dynamically
+        processes[0].cpu = currentLoad; // UI process takes the input load
+        processes[1].cpu = targetLoad > 10 ? 0.5 : (Math.random() * 8); // CNN trains in background when idle
+        
+        // Sort processes by highest CPU% (just like htop default)
+        let sortedProcs = [...processes].sort((a, b) => b.cpu - a.cpu);
+
+        // Render Table
+        processBody.innerHTML = '';
+        sortedProcs.forEach((p, i) => {
+            // Highlight the top process if load is high
+            const rowClass = (i === 0 && p.cpu > 5) ? 'process-active' : '';
+            const status = (p.cpu > 5) ? 'R' : 'S'; // Running vs Sleeping
+            
+            processBody.insertAdjacentHTML('beforeend', `
+                <tr class="${rowClass}">
+                    <td class="ps-2">${p.pid}</td>
+                    <td>${p.user}</td>
+                    <td class="d-none d-md-table-cell">${p.pri}</td>
+                    <td class="d-none d-md-table-cell">${p.ni}</td>
+                    <td class="d-none d-lg-table-cell">${p.virt}</td>
+                    <td class="d-none d-lg-table-cell">${p.res}</td>
+                    <td class="d-none d-lg-table-cell">${p.shr}</td>
+                    <td>${status}</td>
+                    <td>${p.cpu.toFixed(1)}</td>
+                    <td>${p.mem.toFixed(1)}</td>
+                    <td>${p.time}</td>
+                    <td>${p.cmd}</td>
+                </tr>
+            `);
+        });
+
+        requestAnimationFrame(renderHtop);
+    }
+
+    renderHtop();
+});
+
+// --- STAGGERED SERVER RACK ENGINE (AUTO-RUN) ---
+
+const serverTimers = new Map();
+
+// --- NEW: Automatically boot all servers on page load ---
+document.addEventListener("DOMContentLoaded", () => {
+    const allBlades = document.querySelectorAll('.server-blade');
+    
+    // Boot them sequentially with a 300ms delay between each server
+    allBlades.forEach((blade, index) => {
+        setTimeout(() => {
+            // Add 'locked-active' so they stay on permanently unless the user clicks them
+            blade.classList.add('locked-active');
+            executeBootSequence(blade);
+        }, index * 300); 
+    });
+});
+
+// Desktop Hover Event (Only affects servers that aren't locked active)
+function bootServer(element) {
+    if (element.classList.contains('locked-active')) return;
+    executeBootSequence(element);
+}
+
+function shutdownServer(element) {
+    if (element.classList.contains('locked-active')) return;
+    executeShutdownSequence(element);
+}
+
+// Mobile/Click Toggle
+function toggleServerMobile(element) {
+    // Allows the user to click/tap a server to manually shut it down or turn it back on
+    if (element.classList.contains('locked-active')) {
+        element.classList.remove('locked-active');
+        executeShutdownSequence(element);
+    } else {
+        element.classList.add('locked-active');
+        executeBootSequence(element);
+    }
+}
+
+// Staggered Hardware Boot Logic
+function executeBootSequence(blade) {
+    if (serverTimers.has(blade)) {
+        serverTimers.get(blade).forEach(timer => clearTimeout(timer));
+    }
+    
+    let timers = [];
+    
+    // Stage 1: Power & Fans spin up instantly
+    blade.classList.add('boot-stage-1');
+    
+    // Stage 2: LCD Backlight & HDDs (300ms delay)
+    timers.push(setTimeout(() => {
+        blade.classList.add('boot-stage-2');
+    }, 300));
+    
+    // Stage 3: Data stream & text illuminate (600ms delay)
+    timers.push(setTimeout(() => {
+        blade.classList.add('boot-stage-3');
+        const status = blade.querySelector('.deploy-status');
+        if (status) status.innerText = 'ONLINE';
+    }, 600));
+
+    serverTimers.set(blade, timers);
+}
+
+// Hardware Shutdown Logic
+function executeShutdownSequence(blade) {
+    if (serverTimers.has(blade)) {
+        serverTimers.get(blade).forEach(timer => clearTimeout(timer));
+    }
+    
+    // Instant power-down
+    blade.classList.remove('boot-stage-3', 'boot-stage-2', 'boot-stage-1');
+    
+    const status = blade.querySelector('.deploy-status');
+    if (status) status.innerText = 'OFFLINE';
+}
+
+
+// --- ARCHITECTURE BLUEPRINT INTERACTION ---
+document.addEventListener("DOMContentLoaded", () => {
+    const cnnNode = document.getElementById('cnn-engine-node');
+    const archContainer = document.getElementById('arch-container');
+
+    if (!cnnNode || !archContainer) return;
+
+    // Desktop Hover
+    cnnNode.addEventListener('mouseenter', () => {
+        archContainer.classList.add('processing-active');
+    });
+
+    cnnNode.addEventListener('mouseleave', () => {
+        archContainer.classList.remove('processing-active');
+    });
+
+    // Mobile Tap Support
+    cnnNode.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Prevents default hover sticking on iOS
+        if (archContainer.classList.contains('processing-active')) {
+            archContainer.classList.remove('processing-active');
+        } else {
+            archContainer.classList.add('processing-active');
+            
+            // Auto-turn off after 3 seconds on mobile
+            setTimeout(() => {
+                archContainer.classList.remove('processing-active');
+            }, 3000);
+        }
+    });
+});

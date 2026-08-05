@@ -1218,3 +1218,429 @@ body {
         min-height: 600px !important; /* Prevents layout jump for detailed text on small screens */
     }
 }
+
+/* =========================================================
+   HYPER-REALISTIC HTOP TERMINAL
+   ========================================================= */
+
+.htop-terminal {
+    background-color: #000000;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    border: 1px solid #333;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 1), 0 0 15px rgba(0, 255, 204, 0.1);
+    border-radius: 2px;
+}
+
+/* CRT Scanline Overlay */
+.terminal-scanlines {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    z-index: 0;
+}
+
+/* ANSI Colors */
+.terminal-white { color: #e5e5e5; }
+.text-terminal-white { color: #e5e5e5; }
+.terminal-cyan { color: #00ffff; }
+.terminal-green { color: #00ff00; }
+.terminal-red { color: #ff0000; }
+.terminal-yellow { color: #ffff00; }
+.terminal-bg-green { background-color: #00aa00 !important; }
+.terminal-bg-cyan { background-color: #00aaaa !important; }
+
+/* Segmented Bracket Bars */
+.htop-row { line-height: 1.1; margin-bottom: 2px; }
+.htop-label { width: 35px; color: #00ffff; display: inline-block; font-weight: bold; }
+.htop-bracket { color: #e5e5e5; font-weight: bold; padding: 0 4px; }
+
+.htop-bar-track {
+    height: 14px;
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* This creates the illusion of individual terminal blocks! */
+    mask-image: repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 8px);
+    -webkit-mask-image: repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 8px);
+}
+
+.htop-cpu-user { height: 100%; background-color: #00ff00; transition: width 0.1s ease-out; position: absolute; left: 0; }
+.htop-cpu-sys { height: 100%; background-color: #ff0000; transition: width 0.1s ease-out; position: absolute; }
+.htop-mem-used { height: 100%; background-color: #00ff00; position: absolute; }
+.htop-mem-buffers { height: 100%; background-color: #0000ff; position: absolute; }
+.htop-mem-cache { height: 100%; background-color: #ffff00; position: absolute; }
+.htop-swp-used { height: 100%; background-color: #ff0000; position: absolute; }
+
+.htop-bar-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-shadow: 
+        -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; /* White outline for readability */
+    pointer-events: none;
+    z-index: 5;
+    mask-image: none;
+    -webkit-mask-image: none;
+}
+
+/* Process Table */
+.htop-table th { padding: 2px 4px; font-weight: normal; border: none; }
+.htop-table td { padding: 2px 4px; color: #0e0d0d; border: none; font-size: 0.8rem; }
+.htop-table tr:hover td { background-color: #00aaaa; color: #000; cursor: default; }
+.process-active td { background-color: #00aaaa; color: #000; }
+
+@media (max-width: 768px) {
+    .htop-terminal { font-size: 0.7rem; }
+    .htop-label { width: 30px; }
+    .htop-bar-text { font-size: 0.65rem; }
+    .htop-table td, .htop-table th { font-size: 0.7rem; padding: 2px; }
+}
+
+/* =========================================================
+   HYPER-REALISTIC SERVER RACK (VISIBILITY & FAN FIXES)
+   ========================================================= */
+
+.server-rack {
+    background-color: #030303;
+    box-shadow: inset 0 0 60px #000, 0 10px 40px rgba(0,0,0,0.8);
+    border: 2px solid #1a1a1a;
+}
+
+/* Rack Rails */
+.rack-rail {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 24px;
+    background: linear-gradient(90deg, #0a0a0a, #1a1a1a, #0a0a0a);
+    border-left: 1px solid #222;
+    border-right: 1px solid #000;
+    z-index: 0;
+}
+.rack-rail.left { left: 4px; }
+.rack-rail.right { right: 4px; }
+
+.rack-screw {
+    width: 8px; height: 8px;
+    background: radial-gradient(circle, #444 0%, #000 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.3), 0 1px 1px #000;
+}
+
+/* Server Blade Base styling */
+.server-blade {
+    background: linear-gradient(180deg, #2b2b2b 0%, #1c1c1c 10%, #111111 100%);
+    border: 1px solid #000;
+    border-top: 1px solid #444;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+    margin: 0 32px; 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+.server-blade:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0,0,0,0.9); }
+
+/* Handles & Grips */
+.blade-handle {
+    width: 28px;
+    background: linear-gradient(90deg, #111, #2a2a2a, #0a0a0a);
+    border-right: 1px solid #000; border-left: 1px solid #000;
+    color: #666;
+    font-size: 0.6rem;
+}
+.handle-grip {
+    width: 12px; height: 3px;
+    background-color: #000;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.2);
+}
+.u-marker { transform: rotate(-90deg); letter-spacing: 2px; }
+
+/* Control Panel & LEDs */
+.power-button {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #444, #111);
+    border: 2px solid #000;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.2);
+    transition: all 0.4s ease;
+}
+.led {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background-color: #333;
+    box-shadow: inset 0 1px 1px #000;
+    transition: all 0.2s ease;
+}
+
+/* LCD Screen - Visibility Increased */
+.blade-lcd {
+    background: #060a08; 
+    border: 2px solid #000;
+    border-bottom: 2px solid #222;
+    border-radius: 2px;
+    box-shadow: inset 0 0 15px #000, inset 0 2px 5px rgba(0,0,0,0.5);
+    transition: all 0.5s ease;
+}
+.lcd-scanlines {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 1px, transparent 1px, transparent 2px);
+    z-index: 5;
+}
+.lcd-content {
+    position: relative; z-index: 10;
+    opacity: 0.85; /* Increased so text is visible even when offline */
+    transform: translateY(5px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #7a9e8b; /* Brighter, readable grey-green when offline */
+}
+.deploy-status { background-color: #222; color: #aaa; border: 1px solid #444; }
+.blade-link {
+    font-size: 0.75rem; color: #00ffcc !important; text-decoration: none;
+    opacity: 0; height: 0; overflow: hidden; transition: all 0.4s ease;
+}
+.blade-link:hover { text-shadow: 0 0 10px #00ffcc; }
+
+/* Network Graph */
+.network-graph { height: 15px; opacity: 0; transition: opacity 0.3s ease; }
+.eq-bar { width: 4px; background-color: #00ffcc; height: 2px; border-radius: 1px; }
+
+/* Cooling System Fixes */
+.vent-grill {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.7) 2px, rgba(0,0,0,0.7) 4px);
+    z-index: 5;
+}
+.fan-unit {
+    width: 44px; height: 44px; border-radius: 50%;
+    background-color: #000; border: 2px solid #111;
+    position: relative; overflow: hidden; z-index: 1;
+    box-shadow: inset 0 0 10px #000;
+}
+/* Rebuilt Fan Blades for better visibility */
+.fan-blades {
+    width: 100%; height: 100%;
+    background: conic-gradient(from 0deg, #666 0deg 30deg, transparent 30deg 90deg, #666 90deg 120deg, transparent 120deg 180deg, #666 180deg 210deg, transparent 210deg 270deg, #666 270deg 300deg, transparent 300deg 360deg);
+    border-radius: 50%;
+    /* Idle fans spin slowly by default */
+    animation: fanSpin 4s linear infinite;
+}
+.fan-unit::after {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 14px; height: 14px; background: radial-gradient(circle, #666, #222); border-radius: 50%;
+}
+
+
+/* =========================================================
+   STAGGERED BOOT SEQUENCE STATES
+   ========================================================= */
+
+/* STAGE 1: Power On */
+.server-blade.boot-stage-1 .power-button {
+    background: radial-gradient(circle, #00ffcc, #00aa88);
+    box-shadow: 0 0 10px rgba(0,255,204,0.5), inset 0 1px 2px rgba(255,255,255,0.5);
+    border-color: #004433;
+}
+.server-blade.boot-stage-1 .fan-blades {
+    /* Fans ramp up to high speed instantly */
+    animation: fanSpin 0.15s linear infinite;
+}
+
+/* STAGE 2: System Boot */
+.server-blade.boot-stage-2 .blade-lcd {
+    background-color: rgba(0, 30, 20, 0.9);
+    border-color: #004433;
+    box-shadow: inset 0 0 20px rgba(0, 255, 204, 0.1);
+}
+.server-blade.boot-stage-2 .led-net { animation: ledFlicker 0.3s infinite alternate; background-color: #00ffcc; }
+.server-blade.boot-stage-2 .led-hdd { animation: ledFlicker 0.1s infinite alternate-reverse; background-color: #ffaa00; }
+
+/* STAGE 3: Online & Data Stream */
+.server-blade.boot-stage-3 .lcd-content {
+    opacity: 1; transform: translateY(0); color: #ffffff; /* Bright white text when online */
+}
+.server-blade.boot-stage-3 .project-title { color: #00ffcc; text-shadow: 0 0 8px rgba(0,255,204,0.4); }
+.server-blade.boot-stage-3 .tech-tags span { color: #00ffcc; font-weight: bold; }
+.server-blade.boot-stage-3 .deploy-status { background-color: rgba(0,255,204,0.1); color: #00ffcc; border-color: #00ffcc; }
+.server-blade.boot-stage-3 .blade-link { opacity: 1; height: 20px; }
+.server-blade.boot-stage-3 .network-graph { opacity: 1; }
+.server-blade.boot-stage-3 .eq-bar:nth-child(1) { animation: eqBounce 0.4s ease-in-out infinite alternate; }
+.server-blade.boot-stage-3 .eq-bar:nth-child(2) { animation: eqBounce 0.6s ease-in-out infinite alternate 0.1s; }
+.server-blade.boot-stage-3 .eq-bar:nth-child(3) { animation: eqBounce 0.3s ease-in-out infinite alternate 0.2s; }
+.server-blade.boot-stage-3 .eq-bar:nth-child(4) { animation: eqBounce 0.5s ease-in-out infinite alternate 0.3s; }
+.server-blade.boot-stage-3 .eq-bar:nth-child(5) { animation: eqBounce 0.4s ease-in-out infinite alternate 0.4s; }
+
+
+/* Simplified, bulletproof fan animation */
+@keyframes fanSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+@keyframes ledFlicker { 0%, 20% { opacity: 0.2; box-shadow: none; } 80%, 100% { opacity: 1; box-shadow: 0 0 8px currentColor; } }
+@keyframes eqBounce { 0% { height: 2px; } 100% { height: 12px; } }
+
+/* Mobile Formatting */
+@media (max-width: 768px) {
+    .server-blade { margin: 0 10px; }
+    .rack-rail { width: 12px; }
+    .fan-unit { width: 34px; height: 34px; }
+    .blade-lcd p { display: none; }
+    .server-blade.boot-stage-3 .blade-link { margin-top: 10px !important; height: 25px; }
+}
+
+/* =========================================================
+   ARCHITECTURE BLUEPRINT (DATA FLOW)
+   ========================================================= */
+
+.blueprint-bg {
+    background-color: #020608;
+}
+
+/* Blueprint Grid Lines Background */
+.blueprint-grid {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px; /* Size of the grid squares */
+    z-index: 0;
+}
+
+/* The Nodes */
+.arch-node {
+    background: rgba(0, 10, 15, 0.8);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    border-radius: 4px;
+    width: 100%;
+    max-width: 260px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 1), 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s ease;
+}
+
+/* Interactive Node (The CNN Engine) */
+.interactive-node {
+    border-color: #00ffcc;
+    box-shadow: inset 0 0 20px rgba(0, 255, 204, 0.1), 0 0 15px rgba(0, 255, 204, 0.2);
+}
+
+.processing-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid #ffaa00;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+.ring-1 { width: 50px; height: 50px; }
+.ring-2 { width: 65px; height: 65px; border-style: dashed; }
+
+/* =========================================================
+   RESPONSIVE PIPELINES (THE MAGIC)
+   ========================================================= */
+
+.arch-pipeline {
+    position: relative;
+    background: rgba(0, 255, 204, 0.1);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.data-packet {
+    position: absolute;
+    background-color: #00ffcc;
+    box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+    border-radius: 10px;
+}
+.delay-1 { animation-delay: 1s !important; }
+
+/* DESKTOP (Horizontal Flow) */
+@media (min-width: 992px) {
+    .arch-pipeline {
+        height: 8px;
+        flex-grow: 1;
+        margin: 0 -5px; /* Overlaps slightly with the nodes for a seamless connection */
+    }
+    
+    .data-packet {
+        width: 30px;
+        height: 100%;
+        top: 0; left: 0;
+    }
+
+    .data-packet.forward { animation: flowRight 2s linear infinite; }
+    .data-packet.reverse { animation: flowLeft 0.8s linear infinite; background-color: #ffaa00; box-shadow: 0 0 10px #ffaa00; }
+}
+
+/* MOBILE/TABLET (Vertical Flow) */
+@media (max-width: 991px) {
+    .arch-pipeline {
+        width: 8px;
+        height: 60px;
+        margin: -5px 0;
+    }
+
+    .data-packet {
+        width: 100%;
+        height: 30px;
+        top: 0; left: 0;
+    }
+
+    .data-packet.forward { animation: flowDown 2s linear infinite; }
+    .data-packet.reverse { animation: flowUp 0.8s linear infinite; background-color: #ffaa00; box-shadow: 0 0 10px #ffaa00; }
+}
+
+
+/* =========================================================
+   PROCESSING STATE (Triggered via JS on Hover)
+   ========================================================= */
+
+#arch-container.processing-active .arch-pipeline {
+    background: rgba(255, 170, 0, 0.1);
+    border-color: rgba(255, 170, 0, 0.3);
+}
+
+#arch-container.processing-active .forward { display: none !important; }
+#arch-container.processing-active .reverse { display: block !important; }
+
+/* Engine fires up */
+#arch-container.processing-active #cnn-engine-node {
+    border-color: #ffaa00;
+    background: rgba(40, 20, 0, 0.9);
+    box-shadow: inset 0 0 30px rgba(255, 170, 0, 0.2), 0 0 30px rgba(255, 170, 0, 0.4);
+    transform: scale(1.05);
+}
+
+#arch-container.processing-active .brain-icon { stroke: #ffaa00; }
+#arch-container.processing-active .engine-title { color: #ffaa00 !important; }
+
+#arch-container.processing-active .ring-1 {
+    opacity: 1; animation: pulseRing 1s infinite;
+}
+#arch-container.processing-active .ring-2 {
+    opacity: 0.5; animation: spinRing 4s linear infinite;
+}
+
+
+/* Animations */
+@keyframes flowRight { 0% { transform: translateX(-40px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(300px); opacity: 0; } }
+@keyframes flowLeft { 0% { transform: translateX(300px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(-40px); opacity: 0; } }
+
+@keyframes flowDown { 0% { transform: translateY(-40px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(80px); opacity: 0; } }
+@keyframes flowUp { 0% { transform: translateY(80px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-40px); opacity: 0; } }
+
+@keyframes pulseRing { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; } }
+@keyframes spinRing { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
